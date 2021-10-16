@@ -7,6 +7,9 @@ const ThumbnailBox = styled.div`
 	margin: 10px;
 	button{
 		cursor: pointer;
+		img{
+			max-width: 100%;
+		}
 	}
 `;
 
