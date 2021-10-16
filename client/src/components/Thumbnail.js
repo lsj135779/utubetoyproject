@@ -5,6 +5,9 @@ const ThumbnailBox = styled.div`
 	border-style: solid;
 	border-width: 2px;
 	margin: 10px;
+	button{
+		cursor: pointer;
+	}
 `;
 
 export default function Thumbnail({ thumbnail }) {
@@ -12,9 +15,11 @@ export default function Thumbnail({ thumbnail }) {
 	console.log(thumbnail);	
 	return(
 		<ThumbnailBox>
-			<img src={thumbnail.img} alt={thumbnail.name} />
-			<div>{thumbnail.name}</div>
-			<div>{thumbnail.view} views</div>
+			<button>
+				<img src={thumbnail.img} alt={thumbnail.name} />
+				<div>{thumbnail.name}</div>
+				<div>{thumbnail.view} views</div>
+			</button>
 		</ThumbnailBox>
 	)
 }
