@@ -4,18 +4,20 @@ import styled from 'styled-components';
 
 const HeadBox = styled.header`
 	height: 50px;
-	border-style: solid;
-	border-width: 2px;
+	/* border-style: solid;
+	border-width: 2px; */
+	margin: 0 10px 0 10px;
+	border-bottom: 1px solid;
 	display: flex;
 	align-items: center;
 	.left{
-		flex: 1 0 0;
+		flex: 0.5 0 0;
 	}
 	.mid{
 		flex: 8 0 0;
 	}
 	.right{
-		flex: 1 0 0;
+		flex: 0.5 0 0;
 	}
 `;
 
