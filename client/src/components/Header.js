@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const HeadBox = styled.header`
 	height: 50px;
@@ -22,26 +22,27 @@ const HeadBox = styled.header`
 `;
 
 const Img = styled.img`
-	width: 50px;
-	height: 30px;
+  width: 50px;
+  height: 30px;
 `;
 
-
-
-export default function Header () {
-
-	return (
-		<HeadBox>
-			<Link to='/' className="head left">
-				<Img src="youtube.png" alt="Logo" />
-			</Link>
-			<Link to='/' className="head left">Video</Link>
-			<Link to='/subscription' className="head left">Subscription</Link>
-			<div className="head mid"></div>
-			<Link to='/upload'>
-				<Img className="head right" src="upload.png" alt="Upload" />
-			</Link>
-			<div className="head right">Logout</div>
-		</HeadBox>
-	);
+export default function Header() {
+  return (
+    <HeadBox>
+      <Link to="/" className="head left">
+        <Img src="youtube.png" alt="Logo" />
+      </Link>
+      <Link to="/" className="head left">
+        Video
+      </Link>
+      <Link to="/subscription" className="head left">
+        Subscription
+      </Link>
+      <div className="head mid"></div>
+      <Link to="/upload">
+        <Img className="head right" src="upload.png" alt="Upload" />
+      </Link>
+      <div className="head right">Logout</div>
+    </HeadBox>
+  );
 }
