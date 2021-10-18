@@ -2,12 +2,11 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const HeadBox = styled.div`
+const HeadBox = styled.header`
 	height: 50px;
 	border-style: solid;
 	border-width: 2px;
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	.left{
 		flex: 1 0 0;
@@ -34,10 +33,10 @@ export default function Header () {
 			<Link to='/' className="head left">
 				<Img src="youtube.png" alt="Logo" />
 			</Link>
-			<Link to='/video' className="head left">Video</Link>
-			<div className="head left">Subscription</div>
+			<Link to='/' className="head left">Video</Link>
+			<Link to='/subscription' className="head left">Subscription</Link>
 			<div className="head mid"></div>
-			<Link to='upload'>
+			<Link to='/upload'>
 				<Img className="head right" src="upload.png" alt="Upload" />
 			</Link>
 			<div className="head right">Logout</div>
