@@ -23,9 +23,6 @@ module.exports = {
       views: {
         type: Sequelize.INTEGER,
       },
-      created_at: {
-        type: Sequelize.DATE,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

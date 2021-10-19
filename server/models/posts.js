@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // models.posts.hasMany(models.post_comments);
+      // models.posts.hasMany(models.post_likes);
+      // models.posts.hasOne(models.video);
+      models.posts.belongsTo(models.users, {
+        foreignKey: "user_id",
+      });
     }
   }
   //1:n 1이 n에 대해 hasmany
@@ -20,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       total_likes: DataTypes.INTEGER,
       views: DataTypes.INTEGER,
-      created_at: DataTypes.DATE,
     },
     {
       sequelize,
