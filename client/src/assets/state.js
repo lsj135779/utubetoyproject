@@ -36,6 +36,24 @@ export const dummyData =
 			name: "video6",
 			img: "../images/thumbnail6.png",
 			view: 0
+		},
+		{
+			id: 7,
+			name: "video7",
+			img: "../images/thumbnail7.png",
+			view: 0
+		},
+		{
+			id: 8,
+			name: "video8",
+			img: "../images/thumbnail8.png",
+			view: 0
+		},
+		{
+			id: 9,
+			name: "video9",
+			img: "../images/thumbnail9.png",
+			view: 0
 		}
 	]
 }
