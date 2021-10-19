@@ -3,17 +3,30 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 
 const ThumbnailBox = styled.div`
-  background: tomato;
-  border-style: solid;
-  border-width: 2px;
+  /* border-style: solid;
+	border-width: 1px; */
   img {
-    /* position: relative; */
+    margin: 10px 10px 0 10px;
+    position: relative;
     cursor: pointer;
-    width: 268.48px;
-    height: 150.64px;
+    width: 320px;
+    height: 220px;
   }
-  div {
-    background: lightblue;
+`;
+
+const ContentInfo = styled.div`
+  /* border-style: solid;
+	border-width: 1px; */
+  margin: 10px 0 0 10px;
+  display: flex;
+  .info {
+    margin-left: 10px;
+    font-size: 13px;
+    .info_name {
+      font-size: 15px;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
   }
 `;
 
@@ -27,10 +40,16 @@ export default function Thumbnail({ thumbnail }) {
   return (
     <ThumbnailBox onClick={accessPlayPage}>
       <img src={thumbnail.img} alt={thumbnail.name} />
-      <div>
-        <div>{thumbnail.name}</div>
-        <div>{thumbnail.view} views</div>
-      </div>
+      <ContentInfo>
+        <div>프로필마크</div>
+        <div className="info">
+          <div className="info_name">{thumbnail.name}</div>
+          <div>{thumbnail.username}</div>
+          <div>
+            {thumbnail.view} views - {thumbnail.created_at}
+          </div>
+        </div>
+      </ContentInfo>
     </ThumbnailBox>
   );
 }

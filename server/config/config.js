@@ -1,25 +1,18 @@
 const dotenv = require("dotenv");
-const path = require("path");
+dotenv.config();
 
 module.exports = {
   development: {
-    username: "root",
-    password: null,
-    database: "database_development",
-    host: "127.0.0.1",
-    dialect: "mysql",
-  },
-  test: {
-    username: "root",
-    password: null,
-    database: "database_test",
+    username: process.env.REACT_APP_DB_USER,
+    password: process.env.REACT_APP_DB_PASSWORD || "",
+    database: "utube",
     host: "127.0.0.1",
     dialect: "mysql",
   },
   production: {
-    username: "root",
-    password: null,
-    database: "database_production",
+    username: process.env.REACT_APP_DB_USER,
+    password: process.env.REACT_APP_DB_PASSWORD,
+    database: "utube",
     host: "127.0.0.1",
     dialect: "mysql",
   },
