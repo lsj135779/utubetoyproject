@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-      },
       title: {
         type: Sequelize.STRING,
       },
@@ -18,10 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       total_likes: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       views: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
