@@ -1,33 +1,30 @@
 require("dotenv").config();
 const cors = require("cors");
-//const config = require('./config/config'); //  config를 불러온다.
 const express = require("express");
-// const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.PORT || 4000;
 const { sequlize } = require("./models");
+const https = require("https");
+const cookieParser = require("cookie-parser");
+// const controllers = require("./controllers");
 
 const linksRouter = require("./routes/links");
-//const userRoutes = require("./routes/user");
-
-//app.use("./routes/user", userRoutes);
-// sequlize.sync();
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
-  })
-);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(
+  cors({
+    origin: ["https://localhost:4000"],
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS", "DELETE"],
+  })
+);
+// app.get(cookieParser());
 app.use("/", linksRouter);
 
-app.get("/", (req, res) => {
-  res.status(200).send("Server Response Success");
-});
+// app.get("/", (req, res) => {
+//   res.status(200).send("Server Response Success");
+// });
 
 // app.get("/login", (res, result) => {
 //   res.status(200);

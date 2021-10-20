@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const controllerThumbnails = require("../controllers/showThumbnails");
+const { controller } = require("../controllers");
 const controllerVideo = require("../controllers/showVideo");
 //const controller
 
-router.get("/", controllerThumbnails.get);
+router.get("/", controller.get);
 // router.get("/video/:post_id", controllerVideo.get);
 
 module.exports = router;
