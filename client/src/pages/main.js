@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
 import ReactPlayer from 'react-player';
-import { dummyVideos } from '../assets/videos'
 import PlayList from '../pages/playlist';
 import styled from 'styled-components';
 import Thumbnail from '../components/Thumbnail';
@@ -35,7 +34,7 @@ const ThumbnailBox = styled.div`
 	}
 `;
 
-export default function Video () {
+export default function Video ({ clicked, handleClick }) {
 
   return (
     <div>
@@ -45,11 +44,11 @@ export default function Video () {
         width='1000px' 
         height='562.5px' 
         controls 
-        url={dummyVideos.videos[0].src}
+        url={clicked}
       />
       <Playlist>
         { dummyData.videos.map(thumbnail => 
-            <button>
+            <button key={thumbnail.id} onClick={() => handleClick(thumbnail.src)}>
             <img src={thumbnail.img} alt={thumbnail.name} />
             <div>{thumbnail.name}</div>
             <div>{thumbnail.view} views</div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Thumbnail from '../components/Thumbnail'
@@ -19,7 +20,7 @@ const Playlist = styled.div`
 `;
 
 
-export default function PlayList ({ imgs }) {
+export default function PlayList ({ imgs, handleClick }) {
 
 
   // console.log(imgs)
@@ -29,7 +30,10 @@ export default function PlayList ({ imgs }) {
       <Header />
       <Title>Recommended</Title>
       <Playlist>
-        { imgs.map(thumbnail => <Thumbnail key={thumbnail.id} thumbnail={thumbnail} />) }
+        { imgs.map(thumbnail => 
+          <Link to="/play" key={thumbnail.id}>
+          <Thumbnail key={thumbnail.id} thumbnail={thumbnail} handleClick={handleClick}/>
+          </Link> )}
       </Playlist>
     </div>
   );
