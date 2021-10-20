@@ -14,9 +14,6 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
       },
-      created_at: {
-        type: Sequelize.DATE,
-      },
       comment: {
         type: Sequelize.STRING,
       },
