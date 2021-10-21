@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      models.post_comments.belongsTo(models.users);
+      models.post_comments.belongsTo(models.posts);
       // define association here
       //models.post_comments.belongsTo(models.post, { foreignKey: "post_id" });
       //models.post_comments.belongsTo(models.users, { foreignKey: "user_id" });
@@ -15,8 +17,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   post_comments.init(
     {
-      post_id: DataTypes.INTEGER,
-      user_id: DataTypes.INTEGER,
       comment: DataTypes.STRING,
     },
     {

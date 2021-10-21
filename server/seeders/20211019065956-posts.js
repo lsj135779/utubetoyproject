@@ -13,7 +13,7 @@ module.exports = {
      */
     return queryInterface.bulkInsert("posts", [
       {
-        user_id: 1,
+        userId: 1,
         title: "Fun",
         image: "../images/thumbnail1.png",
         total_likes: 3,

@@ -1,10 +1,15 @@
+const { response } = require("express");
 const { posts } = require("../models");
 
 module.exports = {
   get: async (req, res) => {
-    // console.log(req.body);
-    const result = await posts.findAll();
-    res.status(200).json(result);
+    console.log("~~~~~~~~", req.body);
+    const data = await posts.findAll().catch((err) => this.res.json(err));
+    res.status(200).json(data);
+    // const result = await posts.findOne({ where: { user_id: 1 } });
+    // console.log("%%%%%%%%", result);
+    // const result = await posts.findAll();
+    // res.status(200).json(result);
   },
 
   //     const result = await posts.findAll()
