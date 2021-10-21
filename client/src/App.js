@@ -29,7 +29,7 @@ function App() {
           <PlayList imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path='/play'>
-          <Main clicked={clicked} handleClick={handleClick}/>
+          <Main clicked={clicked} handleClick={handleClick} imgs={imgs}/>
         </Route>
         <Route path='/subscription'>
           <Subscription />
