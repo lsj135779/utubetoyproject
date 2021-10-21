@@ -30,26 +30,27 @@ const ContentInfo = styled.div`
   }
 `;
 
-export default function Thumbnail({ thumbnail }) {
-  const history = useHistory();
+export default function Thumbnail({ thumbnail, handleClick }) {
+	const history = useHistory();
 
-  function accessPlayPage() {
-    console.log("check");
-    history.push("/play");
-  }
-  return (
-    <ThumbnailBox onClick={accessPlayPage}>
-      <img src={thumbnail.img} alt={thumbnail.name} />
-      <ContentInfo>
-        <div>프로필마크</div>
-        <div className="info">
-          <div className="info_name">{thumbnail.name}</div>
-          <div>{thumbnail.username}</div>
-          <div>
-            {thumbnail.view} views - {thumbnail.created_at}
-          </div>
-        </div>
-      </ContentInfo>
-    </ThumbnailBox>
-  );
+
+	function accessPlayPage() {
+		// console.log('check')
+		// history.push('/play')
+	}
+
+
+	return(
+		<ThumbnailBox onClick={accessPlayPage}>
+				<img src={thumbnail.img} alt={thumbnail.name} onClick={() => handleClick(thumbnail.src)}/>
+				<ContentInfo>
+					<div>프로필마크</div>
+					<div className="info">
+						<div className="info_name">{thumbnail.name}</div>
+						<div>{thumbnail.username}</div>
+						<div>{thumbnail.view} views - {thumbnail.created_at}</div>
+					</div>		
+				</ContentInfo>		
+		</ThumbnailBox>
+	)
 }

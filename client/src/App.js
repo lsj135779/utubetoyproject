@@ -14,7 +14,11 @@ import './App.css';
 function App() {
 
   const [imgs, isImgs] = useState(dummyData.videos)
+  const [clicked, setClicked] = useState(null)
 
+  const handleClick = (src) => {
+    setClicked(src)
+  }
 
   return (
     <BrowserRouter>
@@ -22,10 +26,10 @@ function App() {
       {/* <img src={process.env.PUBLIC_URL + '/images/thumbnail1.png'} alt="thumbnail" /> */}
       <Switch>
         <Route exact path='/'>
-          <PlayList imgs={imgs} />
+          <PlayList imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path='/play'>
-          <Main />
+          <Main clicked={clicked} handleClick={handleClick} imgs={imgs}/>
         </Route>
         <Route path='/subscription'>
           <Subscription />

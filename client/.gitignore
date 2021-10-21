@@ -10,7 +10,8 @@
 
 # production
 /build
-
+client/public/images
+client/public/videos
 # misc
 .DS_Store
 .env.local
