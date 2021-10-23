@@ -17,7 +17,11 @@ function App() {
   const [clicked, setClicked] = useState(null)
 
   const handleClick = (src) => {
-    setClicked(src)
+    if(src === 'Logo') {
+      setClicked(null)
+    } else {
+      setClicked(src)
+    }
   }
 
   return (
@@ -26,7 +30,7 @@ function App() {
       {/* <img src={process.env.PUBLIC_URL + '/images/thumbnail1.png'} alt="thumbnail" /> */}
       <Switch>
         <Route exact path='/'>
-          <PlayList imgs={imgs} handleClick={handleClick} />
+          <PlayList clicked={clicked} imgs={imgs} handleClick={handleClick}  />
         </Route>
         <Route path='/play'>
           <Main clicked={clicked} handleClick={handleClick} imgs={imgs}/>

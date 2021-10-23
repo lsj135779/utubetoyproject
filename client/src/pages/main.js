@@ -1,10 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
 import ReactPlayer from 'react-player/lazy';
-import PlayList from '../pages/playlist';
 import styled from 'styled-components';
 import Thumbnail from '../components/Thumbnail';
-import { dummyData } from '../assets/state'
 import { Link } from "react-router-dom";
 
 const Main = styled.main`
@@ -29,35 +27,10 @@ const Playlist = styled.div`
   border-width: 2px;
   display: flex;
   flex-direction: column;
-  img {
-    width: 80px;
-    height: 140px;
-  }
-  .thumbnail-wrapper {
-    display: flex;
-    padding: 10px;
-    border: 1px solid gray;
-  }
   .link {
     text-decoration: none;
     color: black;
   }
-`;
-
-const ContentInfo = styled.div`
-	/* border-style: solid;
-	border-width: 1px; */
-	margin: 10px 0 0 10px;
-	display: flex;
-	.info{
-		margin-left: 10px;
-		font-size: 13px;
-		.info_name{
-			font-size: 15px;
-			font-weight: bold;
-			padding-bottom: 5px;
-		}
-	}
 `;
 
 
@@ -65,7 +38,7 @@ export default function Video ({ clicked, handleClick, imgs }) {
 
   return (
     <div>
-      <Header />
+      <Header handleClick={handleClick} />
       <Main>
         <Player_wrapper>
           <ReactPlayer
@@ -78,23 +51,12 @@ export default function Video ({ clicked, handleClick, imgs }) {
           />
         </Player_wrapper>
         <Playlist>
-        { imgs.map(thumbnail => 
-          <Link to="/play" key={thumbnail.id} className="link">
-            <div className="thumbnail-wrapper" onClick={() => handleClick(thumbnail.src)}>
-              <img src={thumbnail.img} alt={thumbnail.name} />
-                <ContentInfo>
-                  <div>프로필마크</div>
-                  <div className="info">
-                    <div className="info_name">{thumbnail.name}</div>
-                    <div>{thumbnail.username}</div>
-                    <div>{thumbnail.view} views - {thumbnail.created_at}</div>
-                  </div>
-              </ContentInfo>	
-            </div>
-          </Link>
-        )}
-      </Playlist>
-      
+          { imgs.map(thumbnail => 
+            <Link to="/play" key={thumbnail.id}  className="link">
+              <Thumbnail key={thumbnail.id} clicked={clicked} thumbnail={thumbnail} handleClick={handleClick}/>
+            </Link> 
+          )}
+        </Playlist>
       </Main>
     </div>
   );

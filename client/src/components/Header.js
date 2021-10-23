@@ -26,14 +26,11 @@ const Img = styled.img`
   height: 30px;
 `;
 
-export default function Header() {
+export default function Header({ handleClick }) {
   return (
     <HeadBox>
-      <Link to="/" className="head left">
+      <Link to="/" className="head left"  onClick={(e) => handleClick(e.target.alt)}>
         <Img src="youtube.png" alt="Logo" />
-      </Link>
-      <Link to="/" className="head left">
-        Video
       </Link>
       <Link to="/subscription" className="head left">
         Subscription
