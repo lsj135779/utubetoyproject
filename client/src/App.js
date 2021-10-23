@@ -19,7 +19,7 @@ function App() {
     axios
       .get("http://localhost:4000/play", { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
 
         setClicked(res.data);
       });
