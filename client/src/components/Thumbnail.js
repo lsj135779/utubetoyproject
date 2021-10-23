@@ -35,6 +35,10 @@ const ContentInfo = styled.div`
 
 export default function Thumbnail({ thumbnail, handleClick, clicked }) {
 
+  function accessPlayPage() {
+    // console.log('check')
+    // history.push('/play')
+  }
 
 	return(
 		<ThumbnailBox className={clicked? "main" : null} onClick={() => handleClick(thumbnail.src)} >
@@ -50,3 +54,4 @@ export default function Thumbnail({ thumbnail, handleClick, clicked }) {
 		</ThumbnailBox>
 	)
 }
+

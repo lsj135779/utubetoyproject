@@ -9,7 +9,6 @@ const Main = styled.main`
   display: flex;
 `;
 
-
 const Player_wrapper = styled.div`
   flex: 0 1 auto;
   position: relative;
@@ -20,7 +19,7 @@ const Player_wrapper = styled.div`
     top: 0;
     left: 0;
   }
-`
+`;
 const Playlist = styled.div`
   flex: 0 1 500px;
   border-style: solid;
@@ -33,7 +32,6 @@ const Playlist = styled.div`
   }
 `;
 
-
 export default function Video ({ clicked, handleClick, imgs }) {
 
   return (
@@ -42,11 +40,11 @@ export default function Video ({ clicked, handleClick, imgs }) {
       <Main>
         <Player_wrapper>
           <ReactPlayer
-            className='react-player'
-            width='100%'
-            height='100%'
+            className="react-player"
+            width="100%"
+            height="100%"
             controls
-            url={clicked}
+            url={clicked[0].contents}
             playing={true}
           />
         </Player_wrapper>

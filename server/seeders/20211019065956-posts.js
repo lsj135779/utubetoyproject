@@ -21,6 +21,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        userId: 1,
+        title: "action",
+        image: "../images/thumbnail1.png",
+        total_likes: 4,
+        views: 6,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 
