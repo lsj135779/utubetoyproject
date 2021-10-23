@@ -1,3 +1,4 @@
 module.exports = {
-    showThumbnails: require("./showThumbnails"),
+  showThumbnails: require("./showThumbnails"),
+  showVideo: require("./showVideo"),
 };

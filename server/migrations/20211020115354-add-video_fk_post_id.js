@@ -2,11 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("videos", "post_id", {
+    await queryInterface.addColumn("videos", "postId", {
       type: Sequelize.INTEGER,
     });
     await queryInterface.addConstraint("videos", {
-      fields: ["post_id"],
+      fields: ["postId"],
       type: "foreign Key",
       name: "videos_post_id",
       references: { table: "posts", field: "id" },
@@ -22,7 +22,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn("videos", "post_id");
+    await queryInterface.removeColumn("videos", "postId");
     await queryInterface.removeConstraint("videos", "videos_post_id");
     /**
      * Add reverting commands here.
