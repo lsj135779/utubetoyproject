@@ -13,13 +13,13 @@ module.exports = {
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addColumn("post_comments", "post_id", {
+    await queryInterface.addColumn("post_comments", "postId", {
       type: Sequelize.INTEGER,
     });
     await queryInterface.addConstraint("post_comments", {
-      fields: ["post_id"],
+      fields: ["postId"],
       type: "foreign Key",
-      name: "post_comments_post_id",
+      name: "post_comments_postId",
       references: { table: "posts", field: "id" },
       onDelete: "cascade",
       onUpdate: "cascade",
@@ -39,7 +39,7 @@ module.exports = {
       "post_comments_userId"
     );
 
-    await queryInterface.removeColumn("post_comments", "post_id");
+    await queryInterface.removeColumn("post_comments", "postId");
     await queryInterface.removeConstraint(
       "post_comments",
       "post_comments_post_id"

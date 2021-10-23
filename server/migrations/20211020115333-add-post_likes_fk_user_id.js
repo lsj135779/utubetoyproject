@@ -13,13 +13,13 @@ module.exports = {
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addColumn("post_likes", "post_id", {
+    await queryInterface.addColumn("post_likes", "postId", {
       type: Sequelize.INTEGER,
     });
     await queryInterface.addConstraint("post_likes", {
-      fields: ["post_id"],
+      fields: ["postId"],
       type: "foreign Key",
-      name: "post_likes_post_id",
+      name: "post_likes_postId",
       references: { table: "posts", field: "id" },
       onDelete: "cascade",
       onUpdate: "cascade",
@@ -36,9 +36,9 @@ module.exports = {
     await queryInterface.removeColumn("post_likes", "userId");
     await queryInterface.removeConstraint("post_likes", "post_likes_userId");
 
-    await queryInterface.removeColumn("post_likes", "post_id");
+    await queryInterface.removeColumn("post_likes", "postId");
 
-    await queryInterface.removeConstraint("post_likes", "post_likes_post_id");
+    await queryInterface.removeConstraint("post_likes", "post_likes_postId");
     /**
      * Add reverting commands here.
      *
