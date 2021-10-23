@@ -6,9 +6,10 @@ module.exports = {
     //posts 테이블 안에 findOne으로 {where: {id : req.body.id}}
     //posts 영상들과 정보들이 있는디,
     //videos
-    const result = await videos.findAll();
+    console.log(req.body);
+    const result = await videos.findOne({ where: { postId: req.params } });
     res.status(200).json(result);
-    console.log(result);
+    // console.log(result);
   },
 };
 //get:=> posts, videos 를 가져와야된다고 생각합니다.

@@ -15,13 +15,18 @@ function App() {
   const [imgs, isImgs] = useState(dummyData.videos);
   const [clicked, setClicked] = useState(null);
 
-  const handleClick = (e) => {
-    axios
-      .get("http://localhost:4000/play", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
+  const handleClick = (id) => {
+    console.log(id);
+    // axios.get("http://localhost:4000/play").then((res) => {
+    //   // console.log(res.data);
+    // });
 
-        setClicked(res.data);
+    axios
+      .get(`http://localhost:4000/play`, { withCredentials: true })
+      .then((res) => {
+        // console.log(res.data.contents);
+        console.log(res.data);
+        setClicked(res.data.contents);
       });
     // console.log(src);
   };
@@ -34,7 +39,6 @@ function App() {
         isImgs(res.data);
       });
   }, []);
-  console.log(clicked);
   // useEffect(() => {
   //   axios.get("http://localhost:4000/play", { withCredentials: true})
   //   .then((res) => {

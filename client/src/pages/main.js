@@ -60,7 +60,8 @@ const ContentInfo = styled.div`
 `;
 
 export default function Video({ clicked, handleClick, imgs }) {
-  console.log(clicked[0].contents);
+  // console.log(clicked);
+
   return (
     <div>
       <Header />
@@ -71,7 +72,7 @@ export default function Video({ clicked, handleClick, imgs }) {
             width="100%"
             height="100%"
             controls
-            url={clicked[0].contents}
+            url={clicked}
             playing={true}
           />
         </Player_wrapper>
