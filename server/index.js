@@ -8,19 +8,19 @@ const https = require("https");
 const cookieParser = require("cookie-parser");
 // const controllers = require("./controllers");
 
-const linksRouter = require("./routes/links");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ["https://localhost:4000"],
+    origin: ["http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE"],
   })
 );
 // app.get(cookieParser());
+const linksRouter = require("./routes");
 app.use("/", linksRouter);
+//app.use("/play", linksRouter);
 
 // app.get("/", (req, res) => {
 //   res.status(200).send("Server Response Success");

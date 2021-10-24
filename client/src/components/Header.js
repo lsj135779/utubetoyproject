@@ -44,17 +44,17 @@ export default function Header({ handleClick }) {
       <Link to="/subscription" className="head left link">
         Subscription
       </Link>
-      <div className="head mid"></div>
+      <div className="mid"></div>
       <Link to="/upload">
         <Img
           width="50px"
           height="40px"
-          className="head right"
+          className="upload right"
           src="upload.png"
           alt="Upload"
         />
       </Link>
-      <div className="head right">Logout</div>
+      <div className="right">Logout</div>
     </HeadBox>
   );
 }

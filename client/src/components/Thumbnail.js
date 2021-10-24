@@ -33,24 +33,34 @@ const ContentInfo = styled.div`
   }
 `;
 
-export default function Thumbnail({ thumbnail, handleClick, clicked }) {
+export default function Thumbnail({
+  thumbnail,
+  handleClick,
+  clicked,
+  handleClicked,
+}) {
+  function accessPlayPage() {
+    // console.log('check')
+    // history.push('/play')
+  }
+
   return (
     <ThumbnailBox
       className={clicked ? "main" : null}
-      onClick={() => handleClick(thumbnail.src)}
+      onClick={() => handleClick(thumbnail.src, thumbnail.id)}
     >
       <img
-        src={thumbnail.img}
-        alt={thumbnail.name}
+        src={thumbnail.image}
+        alt={thumbnail.title}
         className={clicked ? "main" : "playlist"}
       />
       <ContentInfo>
         <div>프로필마크</div>
         <div className="info">
-          <div className="info_name">{thumbnail.name}</div>
-          <div>{thumbnail.username}</div>
+          <div className="info_name">{thumbnail.title}</div>
+          <div>{thumbnail.user.username}</div>
           <div>
-            {thumbnail.view} views - {thumbnail.created_at}
+            {thumbnail.views} views - {thumbnail.createdAt}
           </div>
         </div>
       </ContentInfo>

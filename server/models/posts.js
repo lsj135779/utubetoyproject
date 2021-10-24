@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       image: DataTypes.STRING,
       total_likes: DataTypes.INTEGER,
-      views: DataTypes.INTEGER,
+      views: { type: DataTypes.INTEGER, defaultValue: 0 },
     },
     {
       sequelize,

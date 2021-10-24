@@ -2,40 +2,40 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("users", [
+    return queryInterface.bulkInsert("videos", [
       {
-        username: "John",
-        password: 1234,
+        postId: 1,
+        contents: "../videos/video1.mp4",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        username: "paul",
-        password: 1234,
+        postId: 2,
+        contents: "../videos/video2.mp4",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        username: "max",
-        password: 1234,
+        postId: 3,
+        contents: "../videos/video3.mp4",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        username: "bob",
-        password: 1234,
+        postId: 4,
+        contents: "../videos/video4.mp4",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        username: "egoing",
-        password: 1234,
+        postId: 5,
+        contents: "../videos/video5.mp4",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        username: "king",
-        password: 1234,
+        postId: 6,
+        contents: "../videos/video6.mp4",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -43,6 +43,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("users", null, {});
+    return queryInterface.bulkDelete("videos", null, {});
   },
 };
