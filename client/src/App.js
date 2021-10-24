@@ -50,12 +50,7 @@ function App() {
         isImgs(res.data);
       });
   }, [clicked]);
-  // // useEffect(() => {
-  // //   axios.get("http://localhost:4000/play", { withCredentials: true})
-  // //   .then((res) => {
 
-  // //   })
-  // // }, []);
   return (
     <BrowserRouter>
       {/* <Header /> */}
