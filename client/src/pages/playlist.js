@@ -20,7 +20,7 @@ const Playlist = styled.div`
 `;
 
 export default function PlayList({ imgs, handleClick }) {
-  console.log(imgs);
+  // console.log(handleClick());
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default function PlayList({ imgs, handleClick }) {
             <Thumbnail
               key={thumbnail.id}
               thumbnail={thumbnail}
-              handleClick={handleClick}
+              handleClick={() => handleClick(thumbnail.id)}
             />
           </Link>
         ))}
