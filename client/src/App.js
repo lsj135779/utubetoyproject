@@ -12,52 +12,57 @@ import "./App.css";
 // import { use } from "../../server/routes";
 
 function App() {
-  const [imgs, isImgs] = useState(dummyData.videos);
+  const [imgs, isImgs] = useState([]);
   const [clicked, setClicked] = useState(null);
 
-  // const handleClick = (e) => {
-  //   axios
-  //     .get("http://localhost:4000/play", { withCredentials: true })
-  //     .then((res) => {
-  //       console.log(res.data);
-
-  //       setClicked(res.data);
-  //     });
-  //   // console.log(src);
+  // const handleClicked = (id) => {
+  // console.log(id);
+  // axios.get("http://localhost:4000/play").then((res) => {
+  //   // console.log(res.data);
+  // });
+  // console.log(src);
   // };
 
-
-  const handleClick = (src) => {
-    if(src === 'Logo') {
-      setClicked(null)
+  const handleClick = (src, id) => {
+    if (src === "Logo") {
+      setClicked(null);
     } else {
-      setClicked(src)
+      // console.log(src);
+      // console.log("$$$$$$$", id);
+      axios
+        .get(`http://localhost:4000/play/${id}`, {
+          "Content-Type": "application/json",
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log(res);
+          setClicked(res.data.video.contents);
+        });
+      // setClicked(id);
     }
-  }
+  };
 
-//   useEffect(() => {
-//     axios
-//       .get("http://localhost:4000/", { withCredentials: true })
-//       .then((res) => {
-//         // console.log("------", res.data);
-//         isImgs(res.data);
-//       });
-//   }, []);
-//   console.log(clicked);
-  // useEffect(() => {
-  //   axios.get("http://localhost:4000/play", { withCredentials: true})
-  //   .then((res) => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/", { withCredentials: true })
+      .then((res) => {
+        console.log("------", res.data);
+        isImgs(res.data);
+      });
+  }, [clicked]);
+  // // useEffect(() => {
+  // //   axios.get("http://localhost:4000/play", { withCredentials: true})
+  // //   .then((res) => {
 
-
-  //   })
-  // }, []);
+  // //   })
+  // // }, []);
   return (
     <BrowserRouter>
       {/* <Header /> */}
       {/* <img src={process.env.PUBLIC_URL + '/images/thumbnail1.png'} alt="thumbnail" /> */}
       <Switch>
-        <Route exact path='/'>
-          <PlayList clicked={clicked} imgs={imgs} handleClick={handleClick}  />
+        <Route exact path="/">
+          <PlayList clicked={clicked} imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path="/play">
           <Main clicked={clicked} handleClick={handleClick} imgs={imgs} />

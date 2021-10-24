@@ -6,6 +6,6 @@ const { showVideo } = require("../controllers");
 //const controller
 
 router.get("/", showThumbnails.get);
-router.get("/play", showVideo.get);
+router.get("/play/:postId", showVideo.get);
 
 module.exports = router;

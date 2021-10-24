@@ -1,8 +1,8 @@
-import React from 'react';
-import Header from '../components/Header';
-import ReactPlayer from 'react-player/lazy';
-import styled from 'styled-components';
-import Thumbnail from '../components/Thumbnail';
+import React from "react";
+import Header from "../components/Header";
+import ReactPlayer from "react-player/lazy";
+import styled from "styled-components";
+import Thumbnail from "../components/Thumbnail";
 import { Link } from "react-router-dom";
 
 const Main = styled.main`
@@ -32,8 +32,8 @@ const Playlist = styled.div`
   }
 `;
 
-export default function Video ({ clicked, handleClick, imgs }) {
-
+export default function Video({ clicked, handleClick, imgs }) {
+  console.log(clicked);
   return (
     <div>
       <Header handleClick={handleClick} />
@@ -44,16 +44,21 @@ export default function Video ({ clicked, handleClick, imgs }) {
             width="100%"
             height="100%"
             controls
-            url={clicked[0].contents}
+            url={clicked}
             playing={true}
           />
         </Player_wrapper>
         <Playlist>
-          { imgs.map(thumbnail => 
-            <Link to="/play" key={thumbnail.id}  className="link">
-              <Thumbnail key={thumbnail.id} clicked={clicked} thumbnail={thumbnail} handleClick={handleClick}/>
-            </Link> 
-          )}
+          {imgs.map((thumbnail) => (
+            <Link to="/play" key={thumbnail.id} className="link">
+              <Thumbnail
+                key={thumbnail.id}
+                clicked={clicked}
+                thumbnail={thumbnail}
+                handleClick={handleClick}
+              />
+            </Link>
+          ))}
         </Playlist>
       </Main>
     </div>
