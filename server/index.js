@@ -20,6 +20,7 @@ app.use(
 // app.get(cookieParser());
 const linksRouter = require("./routes");
 app.use("/", linksRouter);
+//app.use("/play", linksRouter);
 
 // app.get("/", (req, res) => {
 //   res.status(200).send("Server Response Success");
