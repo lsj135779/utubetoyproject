@@ -26,18 +26,28 @@ function App() {
     // console.log(src);
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/", { withCredentials: true })
-      .then((res) => {
-        // console.log("------", res.data);
-        isImgs(res.data);
-      });
-  }, []);
-  console.log(clicked);
+
+  const handleClick = (src) => {
+    if(src === 'Logo') {
+      setClicked(null)
+    } else {
+      setClicked(src)
+    }
+  }
+
+//   useEffect(() => {
+//     axios
+//       .get("http://localhost:4000/", { withCredentials: true })
+//       .then((res) => {
+//         // console.log("------", res.data);
+//         isImgs(res.data);
+//       });
+//   }, []);
+//   console.log(clicked);
   // useEffect(() => {
   //   axios.get("http://localhost:4000/play", { withCredentials: true})
   //   .then((res) => {
+
 
   //   })
   // }, []);
@@ -46,8 +56,8 @@ function App() {
       {/* <Header /> */}
       {/* <img src={process.env.PUBLIC_URL + '/images/thumbnail1.png'} alt="thumbnail" /> */}
       <Switch>
-        <Route exact path="/">
-          <PlayList imgs={imgs} handleClick={handleClick} />
+        <Route exact path='/'>
+          <PlayList clicked={clicked} imgs={imgs} handleClick={handleClick}  />
         </Route>
         <Route path="/play">
           <Main clicked={clicked} handleClick={handleClick} imgs={imgs} />
