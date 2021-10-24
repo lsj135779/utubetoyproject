@@ -16,6 +16,9 @@ const HeadBox = styled.header`
 	.mid{
 		flex: 8 0 0;
 	}
+  .upload{
+    margin-right: 40px;
+  }
 	.right{
 		flex: 0.5 0 0;
 	}
@@ -29,20 +32,20 @@ const Img = styled.img`
 export default function Header() {
   return (
     <HeadBox>
-      <Link to="/" className="head left">
+      <Link to="/" className="left">
         <Img src="youtube.png" alt="Logo" />
       </Link>
-      <Link to="/" className="head left">
+      <Link to="/" className="left">
         Video
       </Link>
       <Link to="/subscription" className="head left">
         Subscription
       </Link>
-      <div className="head mid"></div>
+      <div className="mid"></div>
       <Link to="/upload">
-        <Img className="head right" src="upload.png" alt="Upload" />
+        <Img className="upload right" src="upload.png" alt="Upload" />
       </Link>
-      <div className="head right">Logout</div>
+      <div className="right">Logout</div>
     </HeadBox>
   );
 }

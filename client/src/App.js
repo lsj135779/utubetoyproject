@@ -12,46 +12,57 @@ import "./App.css";
 // import { use } from "../../server/routes";
 
 function App() {
-  const [imgs, isImgs] = useState(dummyData.videos);
+  const [imgs, isImgs] = useState([]);
   const [clicked, setClicked] = useState(null);
 
-  const handleClick = (id) => {
-    console.log(id);
-    // axios.get("http://localhost:4000/play").then((res) => {
-    //   // console.log(res.data);
-    // });
+  // const handleClicked = (id) => {
+  // console.log(id);
+  // axios.get("http://localhost:4000/play").then((res) => {
+  //   // console.log(res.data);
+  // });
+  // console.log(src);
+  // };
 
-    axios
-      .get(`http://localhost:4000/play`, { withCredentials: true })
-      .then((res) => {
-        // console.log(res.data.contents);
-        console.log(res.data);
-        setClicked(res.data.contents);
-      });
-    // console.log(src);
+  const handleClick = (src, id) => {
+    if (src === "Logo") {
+      setClicked(null);
+    } else {
+      // console.log(src);
+      // console.log("$$$$$$$", id);
+      axios
+        .get(`http://localhost:4000/play/${id}`, {
+          "Content-Type": "application/json",
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log(res);
+          setClicked(res.data.video.contents);
+        });
+      // setClicked(id);
+    }
   };
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/", { withCredentials: true })
       .then((res) => {
-        // console.log("------", res.data);
+        console.log("------", res.data);
         isImgs(res.data);
       });
-  }, []);
-  // useEffect(() => {
-  //   axios.get("http://localhost:4000/play", { withCredentials: true})
-  //   .then((res) => {
+  }, [clicked]);
+  // // useEffect(() => {
+  // //   axios.get("http://localhost:4000/play", { withCredentials: true})
+  // //   .then((res) => {
 
-  //   })
-  // }, []);
+  // //   })
+  // // }, []);
   return (
     <BrowserRouter>
       {/* <Header /> */}
       {/* <img src={process.env.PUBLIC_URL + '/images/thumbnail1.png'} alt="thumbnail" /> */}
       <Switch>
         <Route exact path="/">
-          <PlayList imgs={imgs} handleClick={handleClick} />
+          <PlayList clicked={clicked} imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path="/play">
           <Main clicked={clicked} handleClick={handleClick} imgs={imgs} />
