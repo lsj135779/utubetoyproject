@@ -15,16 +15,16 @@ function App() {
   const [imgs, isImgs] = useState(dummyData.videos);
   const [clicked, setClicked] = useState(null);
 
-  const handleClick = (e) => {
-    axios
-      .get("http://localhost:4000/play", { withCredentials: true })
-      .then((res) => {
-        console.log(res.data);
+  // const handleClick = (e) => {
+  //   axios
+  //     .get("http://localhost:4000/play", { withCredentials: true })
+  //     .then((res) => {
+  //       console.log(res.data);
 
-        setClicked(res.data);
-      });
-    // console.log(src);
-  };
+  //       setClicked(res.data);
+  //     });
+  //   // console.log(src);
+  // };
 
 
   const handleClick = (src) => {
