@@ -81,7 +81,7 @@ export default function Upload () {
         <br/>
         <br/>
         <label>Description</label> 
-        <input type="text"></input>
+        <input className="description" type="text"></input>
         <br/>
         <br/>
         <select onChange={(e) => console.log(e.target.value)}>

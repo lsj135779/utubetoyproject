@@ -1,9 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import ReactPlayer from 'react-player/lazy';
 import styled from 'styled-components';
 import Thumbnail from '../components/Thumbnail';
 import { Link } from "react-router-dom";
+
+const Wrap = styled.div`
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+`;
 
 const Main = styled.main`
   display: flex;
@@ -35,7 +42,7 @@ const Playlist = styled.div`
 export default function Video ({ clicked, handleClick, imgs }) {
 
   return (
-    <div>
+    <Wrap>
       <Header handleClick={handleClick} />
       <Main>
         <Player_wrapper>
@@ -56,6 +63,7 @@ export default function Video ({ clicked, handleClick, imgs }) {
           )}
         </Playlist>
       </Main>
-    </div>
+      <Footer />
+    </Wrap>
   );
 }
