@@ -1,5 +1,5 @@
 const { response } = require("express");
-const { posts } = require("../models");
+const { posts, users } = require("../models");
 
 module.exports = {
   get: async (req, res) => {
@@ -14,7 +14,9 @@ module.exports = {
     //   });
     // const result = await posts.findOne({ where: { user_id: 1 } });
     // console.log("%%%%%%%%", result);
-    const result = await posts.findAll();
+    const result = await posts.findAll({
+      include: [{ model: users, attributes: ["username"] }],
+    });
     res.status(200).json(result);
   },
 
