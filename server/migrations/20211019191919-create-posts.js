@@ -18,7 +18,8 @@ module.exports = {
         type: Sequelize.STRING,
       },
       views: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
