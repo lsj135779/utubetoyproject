@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
-import Header from '../components/Header';
-import Thumbnail from '../components/Thumbnail'
-import Footer from '../components/Footer';
-
+import styled from "styled-components";
+import Header from "../components/Header";
+import Thumbnail from "../components/Thumbnail";
+import Footer from "../components/Footer";
 
 const Wrap = styled.div`
   min-height: 100vh;
@@ -14,13 +13,13 @@ const Wrap = styled.div`
 
 const Body = styled.div`
   padding-bottom: 100px;
-  h1{
+  h1 {
     margin: 10px 50px 0 50px;
   }
 `;
 
 const Playlist = styled.div`
-	border-top: 1px solid;
+  border-top: 1px solid;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -28,21 +27,23 @@ const Playlist = styled.div`
   margin: 10px 50px 0 50px;
 `;
 
-
-export default function PlayList ({ imgs, handleClick }) {
-
-
+export default function PlayList({ imgs, handleClick }) {
   return (
     <Wrap>
       <Header />
       <Body>
-        <br/>
+        <br />
         <h1>Recommended</h1>
         <Playlist>
-          { imgs.map(thumbnail => 
+          {imgs.map((thumbnail) => (
             <Link to="/play">
-              <Thumbnail key={thumbnail.id} thumbnail={thumbnail} handleClick={handleClick}/>
-            </Link> )}
+              <Thumbnail
+                key={thumbnail.id}
+                thumbnail={thumbnail}
+                handleClick={handleClick}
+              />
+            </Link>
+          ))}
         </Playlist>
       </Body>
       <Footer />

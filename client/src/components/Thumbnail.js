@@ -7,7 +7,7 @@ const ThumbnailBox = styled.div`
   display: ${(props) => (props.className === "main" ? "flex" : null)};
   padding: ${(props) => (props.className === "main" ? "10px" : null)};
   border: ${(props) => (props.className === "main" ? "1px solid gray" : null)};
-  
+
   img {
     margin: 10px 10px 0 10px;
     position: relative;
@@ -33,25 +33,37 @@ const ContentInfo = styled.div`
   }
 `;
 
-export default function Thumbnail({ thumbnail, handleClick, clicked }) {
-
+export default function Thumbnail({
+  thumbnail,
+  handleClick,
+  clicked,
+  handleClicked,
+}) {
   function accessPlayPage() {
     // console.log('check')
     // history.push('/play')
   }
 
-	return(
-		<ThumbnailBox className={clicked? "main" : null} onClick={() => handleClick(thumbnail.src)} >
-				<img src={thumbnail.img} alt={thumbnail.name} className={clicked? "main" : "playlist"}/>
-				<ContentInfo>
-					<div>프로필마크</div>
-					<div className="info">
-						<div className="info_name">{thumbnail.name}</div>
-						<div>{thumbnail.username}</div>
-						<div>{thumbnail.view} views - {thumbnail.created_at}</div>
-					</div>		
-				</ContentInfo>		
-		</ThumbnailBox>
-	)
+  return (
+    <ThumbnailBox
+      className={clicked ? "main" : null}
+      onClick={() => handleClick(thumbnail.src, thumbnail.id)}
+    >
+      <img
+        src={thumbnail.image}
+        alt={thumbnail.title}
+        className={clicked ? "main" : "playlist"}
+      />
+      <ContentInfo>
+        <div>프로필마크</div>
+        <div className="info">
+          <div className="info_name">{thumbnail.title}</div>
+          <div>{thumbnail.user.username}</div>
+          <div>
+            {thumbnail.views} views - {thumbnail.createdAt}
+          </div>
+        </div>
+      </ContentInfo>
+    </ThumbnailBox>
+  );
 }
-
