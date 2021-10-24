@@ -2,7 +2,7 @@ const { posts } = require("../models");
 const { videos } = require("../models");
 
 module.exports = {
-  get: (req, res) => {
+  get: async (req, res) => {
     //posts 테이블 안에 findOne으로 {where: {id : req.body.id}}
     //posts 영상들과 정보들이 있는디,
     //videos
@@ -12,20 +12,9 @@ module.exports = {
     if (!postId) {
       return res.status(401).send("invalid video");
     } else {
-      posts
-        .findOne({
-          where: { id: postId },
-          include: [{ model: videos, attributes: ["contents"] }],
-        })
-        .then((response) => {
-          response.update({ views: response.views + 1 });
-          console.log("!!!!!!!!!!", response.views);
-          res.status(200).send(response);
-        });
-      // .then((data) => {
-      //   console.log(data);
-      //   res.status(200).json(data);
-      // });
+      const result = await videos.findOne({ where: { postId: postId } });
+      console.log(result.contents);
+      res.status(200).json(result);
     }
   },
 };
