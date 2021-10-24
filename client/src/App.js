@@ -4,8 +4,6 @@ import PlayList from "./pages/playlist";
 import Main from "./pages/main";
 import Subscription from "./pages/subscription";
 import Upload from "./pages/upload";
-import Header from "./components/Header";
-import { dummyData } from "./assets/state";
 import axios from "axios";
 
 import "./App.css";
@@ -63,10 +61,10 @@ function App() {
           <Main clicked={clicked} handleClick={handleClick} imgs={imgs} />
         </Route>
         <Route path="/subscription">
-          <Subscription />
+          <Subscription handleClick={handleClick} />
         </Route>
         <Route path="/upload">
-          <Upload />
+          <Upload handleClick={handleClick} />
         </Route>
       </Switch>
     </BrowserRouter>

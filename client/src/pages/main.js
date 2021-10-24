@@ -41,7 +41,7 @@ const Playlist = styled.div`
 
 export default function Video({ clicked, handleClick, imgs }) {
   return (
-    <div>
+    <>
       <Header handleClick={handleClick} />
       <Container>
         <Main>
@@ -71,6 +71,6 @@ export default function Video({ clicked, handleClick, imgs }) {
         </Playlist>
       </Container>
       {/* <Comments /> */}
-    </div>
+    </>
   );
 }

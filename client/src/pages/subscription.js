@@ -1,10 +1,10 @@
-import React from 'react';
-import Header from '../components/Header';
+import React from "react";
+import Header from "../components/Header";
 
-export default function Upload () {
+export default function Subscription({ handleClick }) {
   return (
     <div>
-      <Header />
+      <Header handleClick={handleClick} />
     </div>
   );
 }

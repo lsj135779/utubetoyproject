@@ -25,18 +25,22 @@ const Playlist = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin: 10px 50px 0 50px;
+  .link {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 export default function PlayList({ imgs, handleClick }) {
   return (
     <Wrap>
-      <Header />
+      <Header handleClick={handleClick} />
       <Body>
         <br />
         <h1>Recommended</h1>
         <Playlist>
           {imgs.map((thumbnail) => (
-            <Link to="/play">
+            <Link to="/play" className="link">
               <Thumbnail
                 key={thumbnail.id}
                 thumbnail={thumbnail}
