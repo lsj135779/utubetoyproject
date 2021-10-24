@@ -9,19 +9,11 @@ import { dummyData } from "./assets/state";
 import axios from "axios";
 
 import "./App.css";
-// import { use } from "../../server/routes";
+
 
 function App() {
   const [imgs, isImgs] = useState([]);
   const [clicked, setClicked] = useState(null);
-
-  // const handleClicked = (id) => {
-  // console.log(id);
-  // axios.get("http://localhost:4000/play").then((res) => {
-  //   // console.log(res.data);
-  // });
-  // console.log(src);
-  // };
 
   const handleClick = (src, id) => {
     if (src === "Logo") {
@@ -50,16 +42,10 @@ function App() {
         isImgs(res.data);
       });
   }, [clicked]);
-  // // useEffect(() => {
-  // //   axios.get("http://localhost:4000/play", { withCredentials: true})
-  // //   .then((res) => {
 
-  // //   })
-  // // }, []);
+
   return (
     <BrowserRouter>
-      {/* <Header /> */}
-      {/* <img src={process.env.PUBLIC_URL + '/images/thumbnail1.png'} alt="thumbnail" /> */}
       <Switch>
         <Route exact path="/">
           <PlayList clicked={clicked} imgs={imgs} handleClick={handleClick} />
