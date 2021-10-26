@@ -18,7 +18,7 @@ module.exports = {
           include: [{ model: videos, attributes: ["contents"] }],
         })
         .then((response) => {
-          response.update({ views: response.views + 1 });
+          response.update({ views: Number(response.views) + 1 });
           console.log("!!!!!!!!!!", response.views);
           res.status(200).send(response);
         });

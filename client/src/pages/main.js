@@ -33,7 +33,7 @@ const Playlist = styled.div`
 `;
 
 export default function Video({ clicked, handleClick, imgs }) {
-  console.log(clicked);
+  // console.log(clicked);
   return (
     <div>
       <Header handleClick={handleClick} />
