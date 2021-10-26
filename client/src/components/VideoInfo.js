@@ -9,11 +9,11 @@ const Description = styled.div`
 
 const Like = styled.button`
   width: fit-content;
+  cursor: pointer;
   height: 50px;
   margin: 10px;
   font-size: 1rem;
-  color: white;
-  background: black;
+  color: black;
   border: none;
   border-radius: 3px;
   flex: 1 0 0;
@@ -23,13 +23,11 @@ const Like = styled.button`
 `;
 
 const DisLike = styled(Like)`
-  color: red;
+  color: black;
   flex: 1 0 0;
 `;
 
 const ContentInfo = styled.div`
-  /* border-style: solid;
-	border-width: 1px; */
   margin: 10px 0 0 10px;
   display: flex;
   align-items: center;
@@ -45,7 +43,14 @@ const ContentInfo = styled.div`
   }
 `;
 
-function VideoInfo() {
+const Subscribe = styled(Like)`
+  background: red;
+  color: white;
+`;
+
+function VideoInfo({ contentInfo }) {
+  console.log(contentInfo);
+
   return (
     <div>
       <ContentInfo>
@@ -53,18 +58,21 @@ function VideoInfo() {
         {/* ContentInfo 컴포넌트 최대한 재활용 */}
         <div>프로필마크</div>
         <div className="info">
-          <div className="info_name">영상제목</div>
-          <div>유저이름</div>
-          <div>조회수 - 업로드 날짜</div>
+          <div className="info_name">{contentInfo.title}</div>
+          {/* <div>{contentInfo.user.username}</div> */}
+          <div>
+            {contentInfo.views} views - {contentInfo.createdAt.slice(0, 10)}
+          </div>
         </div>
         <Like>
-          <i className="fas fa-thumbs-up">330</i>
+          <i className="fas fa-thumbs-up">{contentInfo.total_likes}</i>
         </Like>
         <DisLike>
-          <i className="fas fa-thumbs-down">1,300</i>
+          <i className="fas fa-thumbs-down">1,00</i>
         </DisLike>
+        <Subscribe subscribe>구독</Subscribe>
       </ContentInfo>
-      <Description>어쩌구저쩌구 쌸라쌸랴 영상 설명 나간다</Description>
+      <Description>어쩌구저쩌구 쌸라쌸랴 영상 설명</Description>
     </div>
   );
 }

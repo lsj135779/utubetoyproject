@@ -31,14 +31,10 @@ const Img = styled.img`
   width: ${(props) => props.width || "100px"};
 `;
 
-export default function Header({ handleClick }) {
+export default function Header() {
   return (
     <HeadBox>
-      <Link
-        to="/"
-        className="head left"
-        onClick={(e) => handleClick(e.target.alt)}
-      >
+      <Link to="/" className="head left">
         <Img src="youtube.png" alt="Logo" />
       </Link>
       <Link to="/subscription" className="head left link">

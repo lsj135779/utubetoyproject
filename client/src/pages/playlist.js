@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
@@ -31,10 +31,10 @@ const Playlist = styled.div`
   }
 `;
 
-export default function PlayList({ imgs, handleClick }) {
+export default function PlayList({ handleId, imgs }) {
   return (
     <Wrap>
-      <Header handleClick={handleClick} />
+      <Header />
       <Body>
         <br />
         <h1>Recommended</h1>
@@ -44,7 +44,7 @@ export default function PlayList({ imgs, handleClick }) {
               <Thumbnail
                 key={thumbnail.id}
                 thumbnail={thumbnail}
-                handleClick={handleClick}
+                handleId={handleId}
               />
             </Link>
           ))}

@@ -6,7 +6,8 @@ const ThumbnailBox = styled.div`
 	border-width: 1px; */
   display: ${(props) => (props.className === "main" ? "flex" : null)};
   padding: ${(props) => (props.className === "main" ? "10px" : null)};
-  border: ${(props) => (props.className === "main" ? "1px solid gray" : null)};
+  /* border: ${(props) =>
+    props.className === "main" ? "1px solid gray" : null}; */
 
   img {
     margin: 10px 10px 0 10px;
@@ -33,26 +34,18 @@ const ContentInfo = styled.div`
   }
 `;
 
-export default function Thumbnail({
-  thumbnail,
-  handleClick,
-  clicked,
-  handleClicked,
-}) {
-  function accessPlayPage() {
-    // console.log('check')
-    // history.push('/play')
-  }
-
+export default function Thumbnail({ thumbnail, handleId, video }) {
   return (
     <ThumbnailBox
-      className={clicked ? "main" : null}
-      onClick={() => handleClick(thumbnail.src, thumbnail.id)}
+      className={video ? "main" : null}
+      onClick={() => {
+        handleId(thumbnail);
+      }}
     >
       <img
         src={thumbnail.image}
         alt={thumbnail.title}
-        className={clicked ? "main" : "playlist"}
+        className={video ? "main" : null}
       />
       <ContentInfo>
         <div>프로필마크</div>
@@ -60,7 +53,7 @@ export default function Thumbnail({
           <div className="info_name">{thumbnail.title}</div>
           <div>{thumbnail.user.username}</div>
           <div>
-            {thumbnail.views} views - {thumbnail.createdAt}
+            {thumbnail.views} views - {thumbnail.createdAt.slice(0, 10)}
           </div>
         </div>
       </ContentInfo>

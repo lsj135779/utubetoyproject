@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 
-function Comments() {}
+function Comments() {
+  return <>{/* todo에서 입력, 삭제 icon 가져오기 */}</>;
+}
 
 export default Comments;

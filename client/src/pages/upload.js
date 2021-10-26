@@ -33,7 +33,7 @@ const Dropbox = styled.div`
   }
 `;
 
-export default function Upload({ handleClick }) {
+export default function Upload() {
   const [title, isTitle] = useState("");
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -55,7 +55,7 @@ export default function Upload({ handleClick }) {
 
   return (
     <Wrap>
-      <Header handleClick={handleClick} />
+      <Header />
       <Body>
         <div>
           <h1>Upload Video</h1>
