@@ -7,25 +7,36 @@ import Upload from "./pages/upload";
 import axios from "axios";
 
 import "./App.css";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
 
 function App() {
-  const [video, setVideo] = useState(null);
+  const [videoInfo, setVideoInfo] = useState(
+    JSON.parse(localStorage.getItem("clickedVideo"))
+  );
   const [imgs, setImgs] = useState([]);
-  const [contentInfo, setContentInfo] = useState(null);
 
-  const handleId = (ThumbnailInfo) => {
-    setVideo(ThumbnailInfo);
+  const handleClick = (ThumbnailInfo) => {
+    axios
+      .get(`http://localhost:4000/play/${ThumbnailInfo.id}`, {
+        "Content-Type": "application/json",
+        withCredentials: true,
+      })
+      .then((res) => {
+        localStorage.setItem("clickedVideo", JSON.stringify(res.data));
+        setVideoInfo(res.data);
+      })
+      .catch((err) => alert(err));
   };
 
   useEffect(() => {
-    //imgs(썸네일)만 배열로 렌더링 요청
-
     axios
       .get("http://localhost:4000/", { withCredentials: true })
       .then((res) => {
-        console.log("------", res.data);
         setImgs(res.data);
+<<<<<<< HEAD
         if (video && typeof(video) !== 'string') {
           console.log(video)
           axios
@@ -46,18 +57,11 @@ function App() {
             })
             .catch((err) => alert(err));
         }
+=======
+>>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
       })
       .catch((err) => alert(err));
-  }, [video]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:4000/", { withCredentials: true })
-  //     .then((res) => {
-  //       console.log("------", res.data);
-  //       setImgs(res.data);
-  //     });
-  // }, []);
+  }, [videoInfo]);
 
 
 
@@ -65,17 +69,10 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <PlayList imgs={imgs} handleId={handleId} />
+          <PlayList imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path="/play">
-          <Main
-            video={video}
-            imgs={imgs}
-            contentInfo={contentInfo}
-            handleId={handleId}
-            setContentInfo={setContentInfo}
-            setVideo={setVideo}
-          />
+          <Main videoInfo={videoInfo} imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path="/subscription">
           <Subscription />

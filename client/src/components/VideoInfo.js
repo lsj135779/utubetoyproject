@@ -48,9 +48,13 @@ const Subscribe = styled(Like)`
   color: white;
 `;
 
+<<<<<<< HEAD
 function VideoInfo({ contentInfo }) {
   // console.log(contentInfo);
 
+=======
+function VideoInfo({ videoInfo }) {
+>>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
   return (
     <div>
       <ContentInfo>
@@ -58,14 +62,14 @@ function VideoInfo({ contentInfo }) {
         {/* ContentInfo 컴포넌트 최대한 재활용 */}
         <div>프로필마크</div>
         <div className="info">
-          <div className="info_name">{contentInfo.title}</div>
-          {/* <div>{contentInfo.user.username}</div> */}
+          <div className="info_name">{videoInfo.title}</div>
+          <div>{videoInfo.user.username}</div>
           <div>
-            {contentInfo.views} views - {contentInfo.createdAt.slice(0, 10)}
+            {videoInfo.views} views - {videoInfo.createdAt.slice(0, 10)}
           </div>
         </div>
         <Like>
-          <i className="fas fa-thumbs-up">{contentInfo.total_likes}</i>
+          <i className="fas fa-thumbs-up">{videoInfo.total_likes}</i>
         </Like>
         <DisLike>
           <i className="fas fa-thumbs-down">1,00</i>

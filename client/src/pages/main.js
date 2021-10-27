@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ReactPlayer from "react-player/lazy";
@@ -7,7 +7,6 @@ import Thumbnail from "../components/Thumbnail";
 import { Link } from "react-router-dom";
 import VideoInfo from "../components/VideoInfo";
 import Comments from "../components/Comments";
-import Loading from "../components/Loading";
 
 const StyledMain = styled.main`
   display: flex;
@@ -41,6 +40,7 @@ const StyledPlaylist = styled.div`
   }
 `;
 
+<<<<<<< HEAD
 export default function Main({
   video,
   setVideo,
@@ -62,6 +62,9 @@ export default function Main({
     }
   }, [video]);
 
+=======
+export default function Main({ videoInfo, handleClick, imgs }) {
+>>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
   return (
     <>
       <Header />
@@ -73,20 +76,20 @@ export default function Main({
               width="100%"
               height="100%"
               controls
-              url={video}
+              url={videoInfo.video.contents}
               playing={true}
             />
           </PlayerWrapper>
-          {contentInfo ? <VideoInfo contentInfo={contentInfo} /> : <Loading />}
+          <VideoInfo videoInfo={videoInfo} />
         </StyledMain>
         <StyledPlaylist>
           {imgs.map((thumbnail) => (
             <Link to="/play" key={thumbnail.id} className="link">
               <Thumbnail
                 key={thumbnail.id}
-                video={video}
+                videoInfo={videoInfo}
                 thumbnail={thumbnail}
-                handleId={handleId}
+                handleClick={handleClick}
               />
             </Link>
           ))}
