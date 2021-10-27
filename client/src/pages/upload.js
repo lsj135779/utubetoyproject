@@ -52,14 +52,8 @@ export default function Upload() {
   // 요청할 때 어떤 정보를 넣어서 보내야 하는지
   const postUpload = () => {
     console.log("여기서 서버에 axios로 포스트 요청을 한다.");
-    axios.post("http://localhost:4000/uploads").then((res) => {
-      if (res.status(400)) {
-        alert("실패");
-      }
-      if (res.status(200)) {
-        alert("업로드에 성공했습니다.");
-      }
-    });
+    
+
   };
 
   return (

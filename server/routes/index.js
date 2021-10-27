@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { showThumbnails } = require("../controllers");
-const { showVideo } = require("../controllers");
-const { upload } = require("../controllers");
+const { showThumbnails, showVideo, upload } = require("../controllers");
+
 //const controller
 
 router.get("/", showThumbnails.get);
