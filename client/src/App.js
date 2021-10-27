@@ -43,10 +43,8 @@ function App() {
       });
   }, [clicked]);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> d59df2209548e75801ecd18a0d86cfd60f4bbd16
+
   return (
     <BrowserRouter>
       <Switch>
