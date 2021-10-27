@@ -76,21 +76,12 @@ export default function Upload() {
         <br />
         <label>Title</label>
         <input value={title} type="text" onChange={setTitle}></input>
-<<<<<<< HEAD
         <br/>
         <br/>
         <label>Description</label> 
         <input className="description" type="text"></input>
         <br/>
         <br/>
-=======
-        <br />
-        <br />
-        <label>Description</label>
-        <input type="text"></input>
-        <br />
-        <br />
->>>>>>> 36fc75dc835c5abb35d1d2ad230369d95850e2f8
         <select onChange={(e) => console.log(e.target.value)}>
           <option>선택</option>
           <option>public</option>

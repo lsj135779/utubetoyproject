@@ -9,17 +9,7 @@ import VideoInfo from "../components/VideoInfo";
 import Comments from "../components/Comments";
 import Loading from "../components/Loading";
 
-<<<<<<< HEAD
-const Wrap = styled.div`
-  min-height: 100vh;
-  position: relative;
-  width: 100%;
-`;
-
-const Main = styled.main`
-=======
 const StyledMain = styled.main`
->>>>>>> 36fc75dc835c5abb35d1d2ad230369d95850e2f8
   display: flex;
   flex-direction: column;
 `;
@@ -65,30 +55,14 @@ export default function Main({
     if (!video) {
       const item = JSON.parse(localStorage.getItem("contentInfo"));
       setContentInfo(item);
-      console.log(item);
+      
+      // console.log(item);
       const clicked = JSON.parse(localStorage.getItem("clickedVideo"));
       setVideo(clicked);
-      localStorage.clear();
     }
   }, [video]);
 
   return (
-<<<<<<< HEAD
-    <Wrap>
-      <Header handleClick={handleClick} />
-      <Main>
-        <Player_wrapper>
-          <ReactPlayer
-            className="react-player"
-            width="100%"
-            height="100%"
-            controls
-            url={clicked}
-            playing={true}
-          />
-        </Player_wrapper>
-        <Playlist>
-=======
     <>
       <Header />
       <Container>
@@ -106,7 +80,6 @@ export default function Main({
           {contentInfo ? <VideoInfo contentInfo={contentInfo} /> : <Loading />}
         </StyledMain>
         <StyledPlaylist>
->>>>>>> 36fc75dc835c5abb35d1d2ad230369d95850e2f8
           {imgs.map((thumbnail) => (
             <Link to="/play" key={thumbnail.id} className="link">
               <Thumbnail
@@ -117,16 +90,9 @@ export default function Main({
               />
             </Link>
           ))}
-<<<<<<< HEAD
-        </Playlist>
-      </Main>
-      <Footer />
-    </Wrap>
-=======
         </StyledPlaylist>
       </Container>
       <Comments />
     </>
->>>>>>> 36fc75dc835c5abb35d1d2ad230369d95850e2f8
   );
 }

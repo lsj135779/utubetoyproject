@@ -49,7 +49,7 @@ const Subscribe = styled(Like)`
 `;
 
 function VideoInfo({ contentInfo }) {
-  console.log(contentInfo);
+  // console.log(contentInfo);
 
   return (
     <div>

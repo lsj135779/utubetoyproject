@@ -14,28 +14,8 @@ function App() {
   const [imgs, setImgs] = useState([]);
   const [contentInfo, setContentInfo] = useState(null);
 
-<<<<<<< HEAD
-  const handleClick = (src, id) => {
-    if (src === "Logo") {
-      setClicked(null);
-    } else {
-      // console.log(src);
-      // console.log("$$$$$$$", id);
-      axios
-        .get(`http://localhost:4000/play/${id}`, {
-          "Content-Type": "application/json",
-          withCredentials: true,
-        })
-        .then((res) => {
-          console.log(res);
-          setClicked(res.data.video.contents);
-        });
-      // setClicked(id);
-    }
-=======
   const handleId = (ThumbnailInfo) => {
     setVideo(ThumbnailInfo);
->>>>>>> 36fc75dc835c5abb35d1d2ad230369d95850e2f8
   };
 
   useEffect(() => {
@@ -46,7 +26,8 @@ function App() {
       .then((res) => {
         console.log("------", res.data);
         setImgs(res.data);
-        if (video) {
+        if (video && typeof(video) !== 'string') {
+          console.log(video)
           axios
             .get(`http://localhost:4000/play/${video.id}`, {
               "Content-Type": "application/json",

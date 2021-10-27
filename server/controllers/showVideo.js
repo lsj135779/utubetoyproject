@@ -7,7 +7,7 @@ module.exports = {
     //posts 영상들과 정보들이 있는디,
     //videos
     const postId = req.params.postId;
-    // console.log(postId);
+    console.log('~~~~~~~~~~~~', postId);
 
     if (!postId) {
       return res.status(401).send("invalid video");
@@ -18,7 +18,7 @@ module.exports = {
           include: [{ model: videos, attributes: ["contents"] }],
         })
         .then((response) => {
-          response.update({ views: Number(response.views) + 1 });
+          response.update({ views: response.views + 1 });
           console.log("!!!!!!!!!!", response.views);
           res.status(200).send(response);
         });
