@@ -34,18 +34,18 @@ const ContentInfo = styled.div`
   }
 `;
 
-export default function Thumbnail({ thumbnail, handleId, video }) {
+export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
   return (
     <ThumbnailBox
-      className={video ? "main" : null}
+      className={videoInfo ? "main" : null}
       onClick={() => {
-        handleId(thumbnail);
+        handleClick(thumbnail);
       }}
     >
       <img
         src={thumbnail.image}
         alt={thumbnail.title}
-        className={video ? "main" : null}
+        className={videoInfo ? "main" : null}
       />
       <ContentInfo>
         <div>프로필마크</div>
