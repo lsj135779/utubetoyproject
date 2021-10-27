@@ -13,13 +13,13 @@ const Wrap = styled.div`
 
 const Body = styled.div`
   margin: 10px 50px 100px 50px;
-  .drop{
+  .drop {
     display: flex;
   }
-  label{
+  label {
     display: block;
   }
-  input{
+  input {
     width: 490px;
   }
 `;
@@ -29,24 +29,23 @@ const Dropbox = styled.div`
   border: 1px solid;
   width: 220px;
   height: 220px;
-  i{
+  i {
     margin-top: 102px;
   }
 `;
 
-
 export default function Upload() {
-  const [title, isTitle] = useState("")
+  const [title, isTitle] = useState("");
 
-  const onDrop = useCallback(acceptedFiles => {
-    if (acceptedFiles.length > 1) alert('하나의 파일만 업로드하세요.')
-    else isTitle(acceptedFiles[0].name)
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
+    else isTitle(acceptedFiles[0].name);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const setTitle = (e) => {
-    isTitle(e.target.value)
-  }
+    isTitle(e.target.value);
+  };
 
   // Description과 2개의 선택상자에 대한 state를 만들어서 관리를 해야하는지 상의하기
 
@@ -69,11 +68,11 @@ export default function Upload() {
           <Dropbox {...getRootProps()}>
             <input {...getInputProps()} />
             <i className="fas fa-plus"></i>
-            {
-              isDragActive ?
-                <p>Drop the files here ...</p> :
-                <p>Drag 'n' drop a file here, or click</p>
-            }
+            {isDragActive ? (
+              <p>Drop the files here ...</p>
+            ) : (
+              <p>Drag 'n' drop a file here, or click</p>
+            )}
           </Dropbox>
           <div>썸네일 자리</div>
         </div>
