@@ -1,5 +1,4 @@
-const { posts } = require("../models");
-const { videos } = require("../models");
+const { posts, users, videos } = require("../models");
 
 module.exports = {
   get: (req, res) => {
@@ -15,17 +14,18 @@ module.exports = {
       posts
         .findOne({
           where: { id: postId },
-          include: [{ model: videos, attributes: ["contents"] }],
+          include: [
+            { model: videos, attributes: ["contents"] },
+            { model: users, attributes: ["username"] },
+          ],
         })
         .then((response) => {
-          response.update({ views: response.views + 1 });
-          console.log("!!!!!!!!!!", response.views);
-          res.status(200).send(response);
+          response
+            .update({ views: Number(response.views) + 1 })
+            .then((data) => {
+              res.status(200).json(data.dataValues);
+            });
         });
-      // .then((data) => {
-      //   console.log(data);
-      //   res.status(200).json(data);
-      // });
     }
   },
 };
