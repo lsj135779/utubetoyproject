@@ -1,19 +1,43 @@
 const multer = require("multer");
 const db = require("../models");
 const { videos } = require("../models");
+const bodyParser = require("body-parser");
+// const router = express.Router();
 
 /// multer
 
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     // console.log(req);
+//     cb(null, "uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     console.log(file);
+//     cb(null, file.originalname + "-" + Date.now());
+//   },
+//   fileFilter: (req, file, cb) => {
+//     const ext = path.extname(file.originalname);
+//     if (ext !== ".mp4") {
+//       return cb(res.status(400).send("only mp4"));
+//     } else {
+//       cb(null);
+//     }
+//   },
+// });
+// const upload = multer({ storage: storage }).single("file");
+// console.log(upload);
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    // console.log(req);
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname + "-" + Date.now());
+    console.log(file);
+    cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
-    const type = path.extname(file.originalname);
-    if (type !== ".mp4") {
+    const ext = path.extname(file.originalname);
+    if (ext !== ".mp4") {
       return cb(res.status(400).send("only mp4"));
     } else {
       cb(null);
@@ -24,12 +48,22 @@ const upload = multer({ storage: storage }).single("file");
 
 module.exports = {
   post: (req, res) => {
+    console.log(req);
+
     upload(req, res, (err) => {
+      //비디오를 서버에 저장한다.
+      console.log(req.res);
+
       if (err) {
-        return res.status(400).json(err);
+        return res.status(400).json({ success: false, err });
       } else {
-        res.status(200).json({});
+        // console.log(res);
+        res.status(200).json({
+          success: true,
+          url: res.req.file.path,
+          fileName: res.req.file.filename,
+        });
       }
     });
   },
-};
+}; // ( = router);

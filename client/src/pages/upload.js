@@ -37,10 +37,37 @@ const Dropbox = styled.div`
 export default function Upload() {
   const [title, isTitle] = useState("");
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = (acceptedFiles) => {
     if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
-    else isTitle(acceptedFiles[0].name);
-  }, []);
+    else {
+      // console.log("%%%%%%%%", acceptedFiles);
+      isTitle(acceptedFiles[0].name);
+      console.log(acceptedFiles[0]);
+      const formData = new FormData();
+      const config = {
+        header: { "content-type": "multipart/form-data" },
+      };
+      formData.append("file", acceptedFiles[0]);
+      axios
+        .post(`http://localhost:4000/uploads`, formData, config)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.success) {
+            console.log(response.data);
+          } else {
+            alert("비디오 업로드에 실패했습니다.");
+          }
+        });
+    }
+  };
+  // <Dropzone
+  // onDrop={onDrop}
+  // multiple={false}
+  // maxSize={1000000}>
+  //  {({getRootProps,getInputProps}) => {
+  //    <div></div>
+  //  }}
+  // </Dropzone>;
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const setTitle = (e) => {
@@ -50,11 +77,6 @@ export default function Upload() {
   // Description과 2개의 선택상자에 대한 state를 만들어서 관리를 해야하는지 상의하기
 
   // 요청할 때 어떤 정보를 넣어서 보내야 하는지
-  const postUpload = () => {
-    console.log("여기서 서버에 axios로 포스트 요청을 한다.");
-    
-
-  };
 
   return (
     <Wrap>
@@ -102,7 +124,7 @@ export default function Upload() {
         </select>
         <br />
         <br />
-        <button onClick={postUpload}>Submit</button>
+        <button onClick={onDrop}>Submit</button>
       </Body>
       <Footer />
     </Wrap>
