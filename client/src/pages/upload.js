@@ -21,6 +21,14 @@ const Body = styled.div`
   input {
     width: 490px;
   }
+  textarea {
+      width: 490px;
+      height: 60px;
+  }
+  video {
+    width: 220px;
+    height: 220px;
+  }
 `;
 
 const Dropbox = styled.div`
@@ -35,10 +43,27 @@ const Dropbox = styled.div`
 
 export default function Upload() {
   const [title, isTitle] = useState("");
+  const [description, isDescription] = useState("");
+  const [selectOne, isSelectOne] = useState(null);
+  const [selectTwo, isSelectTwo] = useState(null);
+  const [uploadFile, setUploadFile] = useState(null);
+  const [thumbnail, isThumbnail] =useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
-    else isTitle(acceptedFiles[0].name);
+    else {
+      isTitle(acceptedFiles[0].name);
+      setUploadFile(acceptedFiles[0]);
+      let file = acceptedFiles[0];
+      console.log(file)
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        isThumbnail(reader.result);
+      };
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -46,11 +71,25 @@ export default function Upload() {
     isTitle(e.target.value);
   };
 
-  // Description과 2개의 선택상자에 대한 state를 만들어서 관리를 해야하는지 상의하기
+  const setDescription = (e) => {
+    // console.log(e.target.value)
+    isDescription(e.target.value);
+  }
 
-  // 요청할 때 어떤 정보를 넣어서 보내야 하는지
+  const setSelectOne = (e) => {
+    // console.log(e.target.value)
+    isSelectOne(e.target.value);
+  }
+
+  const setSelectTwo = (e) => {
+    // console.log(e.target.value)
+    isSelectTwo(e.target.value);
+  }
+
+  // 서버에 요청하는 함수
   const postUpload = () => {
-    console.log("여기서 서버에 axios로 포스트 요청을 한다.");
+    const formData = new FormData();
+    formData.append('upload', uploadFile);
   };
 
   return (
@@ -61,7 +100,7 @@ export default function Upload() {
           <h1>Upload Video</h1>
         </div>
         <div className="drop">
-          <Dropbox {...getRootProps()}>
+          {thumbnail ? null : <Dropbox {...getRootProps()}>
             <input {...getInputProps()} />
             <i className="fas fa-plus"></i>
             {isDragActive ? (
@@ -69,27 +108,27 @@ export default function Upload() {
             ) : (
               <p>Drag 'n' drop a file here, or click</p>
             )}
-          </Dropbox>
-          <div>썸네일 자리</div>
-        </div>
+          </Dropbox>}
+          {thumbnail ? <video src={thumbnail} alt="썸네일"/> : null}
+        </div>      
         <br />
         <br />
         <label>Title</label>
-        <input value={title} type="text" onChange={setTitle}></input>
+        <input value={title} type="text" placeholder="제목을 입력하세요" onChange={setTitle}></input>
         <br/>
         <br/>
         <label>Description</label> 
-        <input className="description" type="text"></input>
+        <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
         <br/>
         <br/>
-        <select onChange={(e) => console.log(e.target.value)}>
+        <select value={selectOne} onChange={setSelectOne}>
           <option>선택</option>
           <option>public</option>
           <option>private</option>
         </select>
         <br />
         <br />
-        <select>
+        <select value={selectTwo} onChange={setSelectTwo}>
           <option>선택</option>
           <option>Film & Animation</option>
           <option>Autos & Vehicles</option>
