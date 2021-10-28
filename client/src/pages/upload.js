@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import axios from "axios";
+import ddd from "../../../server/"
 
 const Wrap = styled.div`
   min-height: 100vh;
@@ -39,22 +40,27 @@ export default function Upload() {
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
-    else isTitle(acceptedFiles[0].name);
+    else {
+      // console.log("%%%%%%%%", acceptedFiles);
+      isTitle(acceptedFiles[0].name);
+      // console.log(acceptedFiles[0]);
+      const formData = new FormData();
+      const config = {
+        header: { "content-type": "multipart/form-data" },
+      };
+      formData.append("uploadFile", acceptedFiles[0]);
+      axios
+        .post(`http://localhost:4000/uploads`, formData, config)
+        .then((response) => {
+          console.log(response);
+        });
+    }
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const setTitle = (e) => {
     isTitle(e.target.value);
   };
-
-  // Description과 2개의 선택상자에 대한 state를 만들어서 관리를 해야하는지 상의하기
-
-  // 요청할 때 어떤 정보를 넣어서 보내야 하는지
-  const postUpload = () => {
-    console.log('여기서 서버에 axios로 포스트 요청을 한다.')
-    let formData = new FormData();
-    //const con
-  }
 
 
   return (

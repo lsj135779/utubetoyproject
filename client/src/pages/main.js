@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import ReactPlayer from "react-player/lazy";
 import styled from "styled-components";
@@ -6,7 +6,6 @@ import Thumbnail from "../components/Thumbnail";
 import { Link } from "react-router-dom";
 import VideoInfo from "../components/VideoInfo";
 import Comments from "../components/Comments";
-import Loading from "../components/Loading";
 
 const StyledMain = styled.main`
   display: flex;
@@ -40,27 +39,7 @@ const StyledPlaylist = styled.div`
   }
 `;
 
-export default function Main({
-  video,
-  setVideo,
-  setContentInfo,
-  handleId,
-  imgs,
-  contentInfo,
-}) {
-  useEffect(() => {
-    //비디오 가져오기 + 조회수 올리기
-    // const src = localStorage.getItem("clickedVideo");
-    if (!video) {
-      const item = JSON.parse(localStorage.getItem("contentInfo"));
-      setContentInfo(item);
-      console.log(item);
-      const clicked = JSON.parse(localStorage.getItem("clickedVideo"));
-      setVideo(clicked);
-      localStorage.clear();
-    }
-  }, [video]);
-
+export default function Main({ videoInfo, handleClick, imgs }) {
   return (
     <>
       <Header />
@@ -72,20 +51,20 @@ export default function Main({
               width="100%"
               height="100%"
               controls
-              url={video}
+              url={videoInfo.video.contents}
               playing={true}
             />
           </PlayerWrapper>
-          {contentInfo ? <VideoInfo contentInfo={contentInfo} /> : <Loading />}
+          <VideoInfo videoInfo={videoInfo} />
         </StyledMain>
         <StyledPlaylist>
           {imgs.map((thumbnail) => (
             <Link to="/play" key={thumbnail.id} className="link">
               <Thumbnail
                 key={thumbnail.id}
-                video={video}
+                videoInfo={videoInfo}
                 thumbnail={thumbnail}
-                handleId={handleId}
+                handleClick={handleClick}
               />
             </Link>
           ))}
