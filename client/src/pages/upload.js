@@ -23,6 +23,14 @@ const Body = styled.div`
   input {
     width: 490px;
   }
+  textarea {
+      width: 490px;
+      height: 60px;
+  }
+  video {
+    width: 220px;
+    height: 220px;
+  }
 `;
 
 const Dropbox = styled.div`
@@ -50,92 +58,78 @@ const PlayerWrapper = styled.div`
 export default function Upload() {
   const [title, isTitle] = useState("");
   const [description, isDescription] = useState("");
-  const [files, setFiles] = useState(null);
+  const [selectOne, isSelectOne] = useState(null);
+  const [selectTwo, isSelectTwo] = useState(null);
+  const [uploadFile, setUploadFile] = useState(null);
+  const [thumbnail, isThumbnail] =useState(null);
   const [check, isCheck] = useState(null);
-  // const [privacy, setPrivacy] = useState();
-  // const [genre, setGenre] = useState("");
 
-  const onDrop = (acceptedFiles) => {
-    console.log(acceptedFiles);
-    setFiles(acceptedFiles);
-  };
-
-  // const payload =
-  // const onSubmit = () => {
-  //   axios.post()
-  // };
-
-  // <Dropzone
-  // onDrop={onDrop}
-  // multiple={false}
-  // maxSize={1000000}>
-  //  {({getRootProps,getInputProps}) => {
-  //    <div></div>
-  //  }}
-  // </Dropzone>;
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
+    else {
+      isTitle(acceptedFiles[0].name);
+      setUploadFile(acceptedFiles[0]);
+      let file = acceptedFiles[0];
+      console.log(file)
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        isThumbnail(reader.result);
+      };
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  //제목 입력
   const setTitle = (e) => {
     isTitle(e.target.value);
   };
-  //설명 입력
+
   const setDescription = (e) => {
+    // console.log(e.target.value)
     isDescription(e.target.value);
+  }
+
+  const setSelectOne = (e) => {
+    // console.log(e.target.value)
+    isSelectOne(e.target.value);
+  }
+
+  const setSelectTwo = (e) => {
+    // console.log(e.target.value)
+    isSelectTwo(e.target.value);
+  }
+
+  // 서버에 요청하는 함수
+  const postUpload = () => {
+    const formData = new FormData();
+    formData.append('upload', uploadFile);
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+    // formData.append("file", title);
+    // formData.append("description", description);
+    //console.log(formData);
+    const payload = {
+      formData: formData,
+      userId: 1,
+      image: null,
+      title: title,
+      description: description,
+    };
+    axios
+      .post(`http://localhost:4000/uploads`, payload, config)
+      .then((response) => {
+        //posts 내용 작성
+        if (response.data.success) {
+          console.log(response.data);
+          isCheck(response.data);
+        } else {
+          alert("비디오 업로드에 실패했습니다.");
+        }
+      });
   };
-  //저장 버튼
-  const payload = [];
-
-  const addClicked = (e) => {
-    // axios.post("http://localhost:4000/pots");
-    if (files.length > 1) alert("하나의 파일만 업로드하세요.");
-    else {
-      // console.log("%%%%%%%%", files);
-      // isTitle(files[0].name);
-      // console.log(title);
-      // console.log(files[0]);
-      //없어도 올라갈거 같은데.
-
-      //무슨 책 보세요..?
-      //
-      //아하...엔드포인트를 다르게 줘야하나봐요...
-      //근데...그러면 서버에서 요청이 두 개가 다르게 오는데
-      // 그거를 하나로 돌려주려면...
-      //아니면 첫번쨰 엔드포인트는 저장을 하는 res보내주고
-      //두번째 엔드포인트 애는 db에저장하고 업로드하는 애로
-
-      const formData = new FormData();
-      const config = {
-        header: { "content-type": "multipart/form-data" },
-      };
-      formData.append("file", files[0]);
-      // formData.append("file", title);
-      // formData.append("description", description);
-      //console.log(formData);
-      const payload = {
-        formData: formData,
-        userId: 1,
-        image: null,
-        title: title,
-        description: description,
-      };
-      axios
-        .post(`http://localhost:4000/uploads`, payload, config)
-        .then((response) => {
-          //posts 내용 작성
-          if (response.data.success) {
-            console.log(response.data);
-            isCheck(response.data);
-          } else {
-            alert("비디오 업로드에 실패했습니다.");
-          }
-        });
-    }
-  };
-
-  // Description과 2개의 선택상자에 대한 state를 만들어서 관리를 해야하는지 상의하기
-
-  // 요청할 때 어떤 정보를 넣어서 보내야 하는지
 
   return (
     <Wrap>
@@ -145,7 +139,7 @@ export default function Upload() {
           <h1>Upload Video</h1>
         </div>
         <div className="drop">
-          <Dropbox {...getRootProps()}>
+          {thumbnail ? null : <Dropbox {...getRootProps()}>
             <input {...getInputProps()} />
             <i className="fas fa-plus"></i>
             {isDragActive ? (
@@ -153,41 +147,37 @@ export default function Upload() {
             ) : (
               <p>Drag 'n' drop a file here, or click</p>
             )}
-          </Dropbox>
-          <div>썸네일 자리</div>
-        </div>
+          </Dropbox>}
+          {thumbnail ? <video src={thumbnail} alt="썸네일"/> : null}
+        </div>      
         <br />
         <br />
         <label>Title</label>
-        <input value={title} type="text" onChange={setTitle}></input>
-        <br />
-        <br />
-        <label>Description</label>
-        <input
-          type="text"
-          value={description}
-          onChange={setDescription}
-        ></input>
-        <br />
-        <br />
-        {/* <select onChange={(e) => console.log(e.target.value)}>
+        <input value={title} type="text" placeholder="제목을 입력하세요" onChange={setTitle}></input>
+        <br/>
+        <br/>
+        <label>Description</label> 
+        <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
+        <br/>
+        <br/>
+        <select value={selectOne} onChange={setSelectOne}>
           <option>선택</option>
           <option>public</option>
           <option>private</option>
-        </select> */}
+        </select>
         <br />
         <br />
-        {/* <select>
+        <select value={selectTwo} onChange={setSelectTwo}>
           <option>선택</option>
           <option>Film & Animation</option>
           <option>Autos & Vehicles</option>
           <option>Music</option>
           <option>Pets & Animals</option>
           <option>Sports</option>
-        </select> */}
+        </select>
         <br />
         <br />
-        <button onClick={addClicked}>Submit</button>
+        <button onClick={postUpload}>Submit</button>
         <PlayerWrapper>
           {check ? (
             <ReactPlayer
