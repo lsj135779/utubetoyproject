@@ -32,6 +32,7 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
+    // console.log("@@@@@@@@@", file);
     console.log(file);
     cb(null, `${Date.now()}_${file.originalname}`);
   },
@@ -45,25 +46,37 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage }).single("file");
-
 module.exports = {
-  post: (req, res) => {
-    console.log(req);
-
+  //비디오 서버 저장
+  //post: (req, res) => {
+  upload: (req, res) => {
+    //비디오를 서버에 저장한다.
     upload(req, res, (err) => {
-      //비디오를 서버에 저장한다.
-      console.log(req.res);
+      const userid = req.body.userId;
+      const title = req.body.title;
+      const description = req.body.description;
+      console.log(req.file);
 
+      console.log(req.body.formData);
       if (err) {
         return res.status(400).json({ success: false, err });
       } else {
+        // console.log("$$$$$비디오 정보", req.file);
         // console.log(res);
+        console.log(req.file);
         res.status(200).json({
           success: true,
-          url: res.req.file.path,
-          fileName: res.req.file.filename,
+          url: `../../../server/${req.file.path}`,
+          fileName: req.file.filename,
         });
       }
+
+      // console.log("타이틀,내용", req.body);
+      // req.status(200).json({
+      //   success: true,
+      //   userId: userId,
+      //   title: title,
+      //   description: description,
     });
   },
-}; // ( = router);
+};

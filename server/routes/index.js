@@ -7,6 +7,8 @@ const { showThumbnails, showVideo, upload } = require("../controllers");
 
 router.get("/", showThumbnails.get);
 router.get("/play/:postId", showVideo.get);
-router.post("/uploads", upload.post);
+router.post("/uploads", upload.upload);
+//router.post("/uploads/posts", upload.post);
+//router.post("/uploads/posts", upload.post);
 
 module.exports = router;
