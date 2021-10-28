@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import axios from "axios";
+import ReactPlayer from "react-player/lazy";
+//import voooo from "../../../server"
 const Wrap = styled.div`
   min-height: 100vh;
   position: relative;
@@ -41,6 +43,18 @@ const Dropbox = styled.div`
   }
 `;
 
+const PlayerWrapper = styled.div`
+  flex: 0 1 auto;
+  position: relative;
+  height: 40vh;
+  width: 40vw;
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+`;
+
 export default function Upload() {
   const [title, isTitle] = useState("");
   const [description, isDescription] = useState("");
@@ -48,6 +62,7 @@ export default function Upload() {
   const [selectTwo, isSelectTwo] = useState(null);
   const [uploadFile, setUploadFile] = useState(null);
   const [thumbnail, isThumbnail] =useState(null);
+  const [check, isCheck] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
@@ -90,6 +105,30 @@ export default function Upload() {
   const postUpload = () => {
     const formData = new FormData();
     formData.append('upload', uploadFile);
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+    // formData.append("file", title);
+    // formData.append("description", description);
+    //console.log(formData);
+    const payload = {
+      formData: formData,
+      userId: 1,
+      image: null,
+      title: title,
+      description: description,
+    };
+    axios
+      .post(`http://localhost:4000/uploads`, payload, config)
+      .then((response) => {
+        //posts 내용 작성
+        if (response.data.success) {
+          console.log(response.data);
+          isCheck(response.data);
+        } else {
+          alert("비디오 업로드에 실패했습니다.");
+        }
+      });
   };
 
   return (
@@ -139,6 +178,18 @@ export default function Upload() {
         <br />
         <br />
         <button onClick={postUpload}>Submit</button>
+        <PlayerWrapper>
+          {check ? (
+            <ReactPlayer
+              className="react-player"
+              width="80%"
+              height="80%"
+              controls
+              url={check.url}
+              playing={true}
+            />
+          ) : null}
+        </PlayerWrapper>
       </Body>
       <Footer />
     </Wrap>
