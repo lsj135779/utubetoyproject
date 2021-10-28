@@ -40,31 +40,7 @@ const StyledPlaylist = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-export default function Main({
-  video,
-  setVideo,
-  setContentInfo,
-  handleId,
-  imgs,
-  contentInfo,
-}) {
-  useEffect(() => {
-    //비디오 가져오기 + 조회수 올리기
-    // const src = localStorage.getItem("clickedVideo");
-    if (!video) {
-      const item = JSON.parse(localStorage.getItem("contentInfo"));
-      setContentInfo(item);
-      
-      // console.log(item);
-      const clicked = JSON.parse(localStorage.getItem("clickedVideo"));
-      setVideo(clicked);
-    }
-  }, [video]);
-
-=======
 export default function Main({ videoInfo, handleClick, imgs }) {
->>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
   return (
     <>
       <Header />

@@ -7,10 +7,6 @@ import Upload from "./pages/upload";
 import axios from "axios";
 
 import "./App.css";
-<<<<<<< HEAD
-
-=======
->>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
 
 function App() {
   const [videoInfo, setVideoInfo] = useState(
@@ -36,29 +32,6 @@ function App() {
       .get("http://localhost:4000/", { withCredentials: true })
       .then((res) => {
         setImgs(res.data);
-<<<<<<< HEAD
-        if (video && typeof(video) !== 'string') {
-          console.log(video)
-          axios
-            .get(`http://localhost:4000/play/${video.id}`, {
-              "Content-Type": "application/json",
-              withCredentials: true,
-            })
-            .then((res) => {
-              console.log(res.data);
-              setContentInfo(res.data);
-              setVideo(res.data.video.contents);
-
-              localStorage.setItem(
-                "clickedVideo",
-                JSON.stringify(res.data.video.contents)
-              );
-              localStorage.setItem("contentInfo", JSON.stringify(res.data));
-            })
-            .catch((err) => alert(err));
-        }
-=======
->>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
       })
       .catch((err) => alert(err));
   }, [videoInfo]);

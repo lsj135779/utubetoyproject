@@ -20,17 +20,11 @@ module.exports = {
           ],
         })
         .then((response) => {
-<<<<<<< HEAD
-          response.update({ views: response.views + 1 });
-          console.log("!!!!!!!!!!", response.views);
-          res.status(200).send(response);
-=======
           response
             .update({ views: Number(response.views) + 1 })
             .then((data) => {
               res.status(200).json(data.dataValues);
             });
->>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
         });
     }
   },

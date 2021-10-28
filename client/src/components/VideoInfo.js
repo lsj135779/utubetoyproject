@@ -48,13 +48,7 @@ const Subscribe = styled(Like)`
   color: white;
 `;
 
-<<<<<<< HEAD
-function VideoInfo({ contentInfo }) {
-  // console.log(contentInfo);
-
-=======
 function VideoInfo({ videoInfo }) {
->>>>>>> 396fba7df7720e27e605306dfdeb873f8a6f417e
   return (
     <div>
       <ContentInfo>
