@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import ReactPlayer from "react-player/lazy";
 import styled from "styled-components";
 import Thumbnail from "../components/Thumbnail";

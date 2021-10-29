@@ -2,13 +2,16 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const app = express();
+const path = require("path");
 const PORT = process.env.PORT || 4000;
 const { sequlize } = require("./models");
 const https = require("https");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 // const controllers = require("./controllers");
 
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
@@ -20,6 +23,7 @@ app.use(
 // app.get(cookieParser());
 const linksRouter = require("./routes");
 app.use("/", linksRouter);
+app.use(bodyParser.json());
 //app.use("/play", linksRouter);
 
 // app.get("/", (req, res) => {
