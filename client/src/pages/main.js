@@ -52,7 +52,7 @@ export default function Main({ videoInfo, handleClick, imgs }) {
               width="100%"
               height="100%"
               controls
-              url={videoInfo.video.contents}
+              url={`http://localhost:4000/${videoInfo.video}`}
               playing={true}
             />
           </PlayerWrapper>

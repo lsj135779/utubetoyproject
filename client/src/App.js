@@ -15,7 +15,6 @@ function App() {
   const [imgs, setImgs] = useState([]);
 
   const handleClick = (ThumbnailInfo) => {
-    if (ThumbnailInfo.id !== videoInfo.id) {
       axios
       .get(`http://localhost:4000/play/${ThumbnailInfo.id}`, {
         "Content-Type": "application/json",
@@ -26,13 +25,13 @@ function App() {
         setVideoInfo(res.data);
       })
       .catch((err) => alert(err));
-    }
   };
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/", { withCredentials: true })
       .then((res) => {
+        console.log(res.data)
         setImgs(res.data);
       })
       .catch((err) => alert(err));

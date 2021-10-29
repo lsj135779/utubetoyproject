@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from "react";
+import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
 import ReactPlayer from "react-player/lazy";
-//import voooo from "../../../server"
+
 const Wrap = styled.div`
   min-height: 100vh;
   position: relative;
@@ -58,28 +59,53 @@ const PlayerWrapper = styled.div`
 export default function Upload() {
   const [title, isTitle] = useState("");
   const [description, isDescription] = useState("");
-  const [selectOne, isSelectOne] = useState(null);
-  const [selectTwo, isSelectTwo] = useState(null);
-  const [uploadFile, setUploadFile] = useState(null);
+  // const [selectOne, isSelectOne] = useState(null);
+  // const [selectTwo, isSelectTwo] = useState(null);
   const [thumbnail, isThumbnail] =useState(null);
-  const [check, isCheck] = useState(null);
+  const [filePath, setFilePath] = useState(null);
+
+  const history = useHistory();
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 1) alert("하나의 파일만 업로드하세요.");
     else {
-      isTitle(acceptedFiles[0].name);
-      setUploadFile(acceptedFiles[0]);
+      // console.log(acceptedFiles)
       let file = acceptedFiles[0];
-      console.log(file)
-      let reader = new FileReader();
-      reader.onloadend = () => {
-        isThumbnail(reader.result);
-      };
-      if (file) {
-        reader.readAsDataURL(file);
+      if (!file.type.includes('video')) alert("비디오 파일만 업로드하세요.")
+      else {
+        isTitle(acceptedFiles[0].name);
+        
+        // 서버에 동영상 저장요청
+        const formData = new FormData();
+        formData.append('upload', file);
+        const config = {
+          header: { "content-type": "multipart/form-data" },
+        };
+        axios.post(`http://localhost:4000/upload`, formData, config)
+        .then((response) => {
+          if (response.data.success) {
+            // console.log(response.data);
+            setFilePath(response.data.url);
+            const payload = {
+              url: response.data.url,
+              fileName: response.data.fileName,
+            }
+            axios.post(`http://localhost:4000/thumbnail`, payload)
+            .then(response => {
+              if (response.data.success) {
+                isThumbnail(response.data.url)
+              } else {
+                alert('썸네일 생성에 실패했습니다.')
+              }
+            })
+          } else {
+            alert("비디오 업로드에 실패했습니다.");
+          }
+        });
       }
     }
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const setTitle = (e) => {
@@ -91,46 +117,28 @@ export default function Upload() {
     isDescription(e.target.value);
   }
 
-  const setSelectOne = (e) => {
-    // console.log(e.target.value)
-    isSelectOne(e.target.value);
-  }
-
-  const setSelectTwo = (e) => {
-    // console.log(e.target.value)
-    isSelectTwo(e.target.value);
-  }
 
   // 서버에 요청하는 함수
   const postUpload = () => {
-    const formData = new FormData();
-    formData.append('upload', uploadFile);
-    const config = {
-      header: { "content-type": "multipart/form-data" },
-    };
-    // formData.append("file", title);
-    // formData.append("description", description);
-    //console.log(formData);
-    const payload = {
-      formData: formData,
+     const payload = {
       userId: 1,
-      image: null,
       title: title,
+      image: thumbnail,
+      filePath: filePath,
       description: description,
     };
-    axios
-      .post(`http://localhost:4000/uploads`, payload, config)
-      .then((response) => {
-        //posts 내용 작성
-        if (response.data.success) {
-          console.log(response.data);
-          isCheck(response.data);
-        } else {
-          alert("비디오 업로드에 실패했습니다.");
-        }
-      });
+    axios.post(`http://localhost:4000/upload/file`, payload)
+    .then((response) => {
+      if(response.data.success) {
+        console.log(response.data);
+        history.push('/');
+      }
+      else {
+        console.log('업로드 실패')
+      }
+    })
   };
-
+  
   return (
     <Wrap>
       <Header />
@@ -139,7 +147,7 @@ export default function Upload() {
           <h1>Upload Video</h1>
         </div>
         <div className="drop">
-          {thumbnail ? null : <Dropbox {...getRootProps()}>
+          <Dropbox {...getRootProps()}>
             <input {...getInputProps()} />
             <i className="fas fa-plus"></i>
             {isDragActive ? (
@@ -147,8 +155,8 @@ export default function Upload() {
             ) : (
               <p>Drag 'n' drop a file here, or click</p>
             )}
-          </Dropbox>}
-          {thumbnail ? <video src={thumbnail} alt="썸네일"/> : null}
+          </Dropbox>
+          {thumbnail ? <img src={`http://localhost:4000/${thumbnail}`} alt="썸네일"></img> : null}
         </div>      
         <br />
         <br />
@@ -159,37 +167,20 @@ export default function Upload() {
         <label>Description</label> 
         <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
         <br/>
-        <br/>
-        <select value={selectOne} onChange={setSelectOne}>
-          <option>선택</option>
-          <option>public</option>
-          <option>private</option>
-        </select>
         <br />
-        <br />
-        <select value={selectTwo} onChange={setSelectTwo}>
-          <option>선택</option>
-          <option>Film & Animation</option>
-          <option>Autos & Vehicles</option>
-          <option>Music</option>
-          <option>Pets & Animals</option>
-          <option>Sports</option>
-        </select>
-        <br />
-        <br />
-        <button onClick={postUpload}>Submit</button>
-        <PlayerWrapper>
-          {check ? (
+        <button onClick={postUpload} >Submit</button>
+        {/* <PlayerWrapper>
+          {filePath ? (
             <ReactPlayer
               className="react-player"
               width="80%"
               height="80%"
               controls
-              url={check.url}
+              url={`http://localhost:4000/${filePath}`}
               playing={true}
             />
           ) : null}
-        </PlayerWrapper>
+        </PlayerWrapper> */}
       </Body>
       <Footer />
     </Wrap>
