@@ -16,10 +16,17 @@ module.exports = {
       },
       total_likes: {
         type: Sequelize.STRING,
+        defaultValue: 0,
       },
       views: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
+      },
+      video: {
+        type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

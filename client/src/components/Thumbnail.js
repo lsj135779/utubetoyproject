@@ -43,7 +43,7 @@ export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
       }}
     >
       <img
-        src={thumbnail.image}
+        src={`http://localhost:4000/${thumbnail.image}`}
         alt={thumbnail.title}
         className={videoInfo ? "main" : null}
       />
