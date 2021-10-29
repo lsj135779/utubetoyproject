@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
       // models.posts.hasMany(models.post_comments);
       // models.posts.hasMany(models.post_likes);
       // models.posts.hasOne(models.video);
-      models.posts.hasOne(models.videos);
       models.posts.hasMany(models.post_comments);
       models.posts.hasMany(models.post_likes);
 
@@ -27,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       total_likes: { type: DataTypes.INTEGER, defaultValue: 0 },
       views: { type: DataTypes.INTEGER, defaultValue: 0 },
+      video: DataTypes.STRING,
+      description: DataTypes.STRING,
     },
     {
       sequelize,
