@@ -24,8 +24,8 @@ const Body = styled.div`
     width: 490px;
   }
   textarea {
-      width: 490px;
-      height: 60px;
+    width: 490px;
+    height: 60px;
   }
   video {
     width: 220px;
@@ -61,7 +61,7 @@ export default function Upload() {
   const [selectOne, isSelectOne] = useState(null);
   const [selectTwo, isSelectTwo] = useState(null);
   const [uploadFile, setUploadFile] = useState(null);
-  const [thumbnail, isThumbnail] =useState(null);
+  const [thumbnail, isThumbnail] = useState(null);
   const [check, isCheck] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -70,7 +70,7 @@ export default function Upload() {
       isTitle(acceptedFiles[0].name);
       setUploadFile(acceptedFiles[0]);
       let file = acceptedFiles[0];
-      console.log(file)
+      console.log(file);
       let reader = new FileReader();
       reader.onloadend = () => {
         isThumbnail(reader.result);
@@ -89,37 +89,41 @@ export default function Upload() {
   const setDescription = (e) => {
     // console.log(e.target.value)
     isDescription(e.target.value);
-  }
+  };
 
   const setSelectOne = (e) => {
     // console.log(e.target.value)
     isSelectOne(e.target.value);
-  }
+  };
 
   const setSelectTwo = (e) => {
     // console.log(e.target.value)
     isSelectTwo(e.target.value);
-  }
+  };
 
   // 서버에 요청하는 함수
   const postUpload = () => {
     const formData = new FormData();
-    formData.append('upload', uploadFile);
+    formData.append("upload", uploadFile);
+    formData.append("userId", 1);
+    formData.append("image", null);
+    formData.append("title", title);
+    formData.append("description", description);
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
     // formData.append("file", title);
     // formData.append("description", description);
     //console.log(formData);
-    const payload = {
-      formData: formData,
-      userId: 1,
-      image: null,
-      title: title,
-      description: description,
-    };
+    // const payload = {
+    //   formData: formData,
+    //   userId: 1,
+    //   image: null,
+    //   title: title,
+    //   description: description,
+    // };
     axios
-      .post(`http://localhost:4000/uploads`, payload, config)
+      .post(`http://localhost:4000/uploads`, formData, config)
       .then((response) => {
         //posts 내용 작성
         if (response.data.success) {
@@ -133,33 +137,44 @@ export default function Upload() {
 
   return (
     <Wrap>
-      <Header />
       <Body>
         <div>
           <h1>Upload Video</h1>
         </div>
         <div className="drop">
-          {thumbnail ? null : <Dropbox {...getRootProps()}>
-            <input {...getInputProps()} />
-            <i className="fas fa-plus"></i>
-            {isDragActive ? (
-              <p>Drop the files here ...</p>
-            ) : (
-              <p>Drag 'n' drop a file here, or click</p>
-            )}
-          </Dropbox>}
-          {thumbnail ? <video src={thumbnail} alt="썸네일"/> : null}
-        </div>      
+          {thumbnail ? null : (
+            <Dropbox {...getRootProps()}>
+              <input {...getInputProps()} />
+              <i className="fas fa-plus"></i>
+              {isDragActive ? (
+                <p>Drop the files here ...</p>
+              ) : (
+                <p>Drag 'n' drop a file here, or click</p>
+              )}
+            </Dropbox>
+          )}
+          {thumbnail ? <video src={thumbnail} alt="썸네일" /> : null}
+        </div>
         <br />
         <br />
         <label>Title</label>
-        <input value={title} type="text" placeholder="제목을 입력하세요" onChange={setTitle}></input>
-        <br/>
-        <br/>
-        <label>Description</label> 
-        <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
-        <br/>
-        <br/>
+        <input
+          value={title}
+          type="text"
+          placeholder="제목을 입력하세요"
+          onChange={setTitle}
+        ></input>
+        <br />
+        <br />
+        <label>Description</label>
+        <textarea
+          value={description}
+          type="text"
+          placeholder="설명을 입력하세요"
+          onChange={setDescription}
+        ></textarea>
+        <br />
+        <br />
         <select value={selectOne} onChange={setSelectOne}>
           <option>선택</option>
           <option>public</option>
