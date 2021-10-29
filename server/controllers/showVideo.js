@@ -6,7 +6,7 @@ module.exports = {
     //posts 영상들과 정보들이 있는디,
     //videos
     const postId = req.params.postId;
-    console.log('~~~~~~~~~~~~', postId);
+    console.log("~~~~~~~~~~~~", postId);
 
     if (!postId) {
       return res.status(401).send("invalid video");

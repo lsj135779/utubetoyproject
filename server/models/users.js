@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       models.users.hasMany(models.posts);
       models.users.hasMany(models.post_likes);
       models.users.hasMany(models.post_comments);
+      models.users.belongToMany(models.subscription);
       //models.users.hasMany(models.post_comments);
       // models.users.hasMany(models.post_likes);
     }

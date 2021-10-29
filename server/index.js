@@ -22,6 +22,7 @@ app.use(
 const linksRouter = require("./routes");
 app.use("/", linksRouter);
 app.use(bodyParser.json());
+app.use(express.static('uploads'));
 //app.use("/play", linksRouter);
 
 // app.get("/", (req, res) => {
