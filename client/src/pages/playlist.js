@@ -32,15 +32,15 @@ const Playlist = styled.div`
 `;
 
 export default function PlayList({ handleClick, videoInfo, imgs }) {
+  console.log(imgs);
   return (
     <Wrap>
-      <Header />
       <Body>
         <br />
         <h1>Recommended</h1>
         <Playlist>
           {imgs.map((thumbnail) => (
-            <Link to="/play" className="link">
+            <Link to="/main" className="link">
               <Thumbnail
                 videoInfo={videoInfo}
                 key={thumbnail.id}

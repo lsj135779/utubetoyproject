@@ -25,8 +25,8 @@ const Body = styled.div`
     width: 490px;
   }
   textarea {
-      width: 490px;
-      height: 60px;
+    width: 490px;
+    height: 60px;
   }
   video {
     width: 220px;
@@ -115,7 +115,7 @@ export default function Upload() {
   const setDescription = (e) => {
     // console.log(e.target.value)
     isDescription(e.target.value);
-  }
+  };
 
 
   // 서버에 요청하는 함수
@@ -141,7 +141,6 @@ export default function Upload() {
   
   return (
     <Wrap>
-      <Header />
       <Body>
         <div>
           <h1>Upload Video</h1>
