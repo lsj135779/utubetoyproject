@@ -6,7 +6,7 @@ const FooterBox = styled.footer`
   width: 100%;
   background-color: #dde0ea;
   bottom: 0px;
-  position: absolute;
+  position: relative;
   div {
     text-align: center;
     padding-top: 40px;

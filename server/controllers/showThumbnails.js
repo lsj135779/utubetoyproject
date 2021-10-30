@@ -1,4 +1,6 @@
+const { Sequelize } = require("sequelize");
 const { posts, users } = require("../models");
+const Op = Sequelize.Op;
 
 module.exports = {
   get: async (req, res) => {
@@ -18,10 +20,6 @@ module.exports = {
     });
     res.status(200).json(result);
   },
-
-  //     const result = await posts.findAll()
-  //     console.log('~~~~~~~',result)
-  //     });
 
   //     //res.status(200).json(result);
 

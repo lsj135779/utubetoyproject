@@ -41,9 +41,9 @@ const StyledPlaylist = styled.div`
 `;
 
 export default function Main({ videoInfo, handleClick, imgs }) {
+
   return (
     <>
-      <Header />
       <Container>
         <StyledMain>
           <PlayerWrapper>
@@ -52,7 +52,7 @@ export default function Main({ videoInfo, handleClick, imgs }) {
               width="100%"
               height="100%"
               controls
-              url={videoInfo.video.contents}
+              url={`http://localhost:4000/${videoInfo.video}`}
               playing={true}
             />
           </PlayerWrapper>
@@ -60,7 +60,7 @@ export default function Main({ videoInfo, handleClick, imgs }) {
         </StyledMain>
         <StyledPlaylist>
           {imgs.map((thumbnail) => (
-            <Link to="/play" key={thumbnail.id} className="link">
+            <Link to="/main" key={thumbnail.id} className="link">
               <Thumbnail
                 key={thumbnail.id}
                 videoInfo={videoInfo}
@@ -72,6 +72,7 @@ export default function Main({ videoInfo, handleClick, imgs }) {
         </StyledPlaylist>
       </Container>
       <Comments />
+      <Footer />
     </>
   );
 }

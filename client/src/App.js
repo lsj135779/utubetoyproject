@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PlayList from "./pages/playlist";
 import Main from "./pages/main";
-import Subscription from "./pages/subscription";
+import Subscriptions from "./pages/subscriptions";
 import Upload from "./pages/upload";
 import axios from "axios";
+import Header from "./components/Header";
 
 import "./App.css";
 
@@ -13,10 +14,13 @@ function App() {
     JSON.parse(localStorage.getItem("clickedVideo"))
   );
   const [imgs, setImgs] = useState([]);
-
+  const [imgs_, setImgs_] = useState([]);
   const handleClick = (ThumbnailInfo) => {
-    if (ThumbnailInfo.id !== videoInfo.id) {
-      axios
+    const imgs_one = imgs.filter(img => img.id !== ThumbnailInfo.id)
+
+    setImgs_(imgs_one);
+
+    axios
       .get(`http://localhost:4000/play/${ThumbnailInfo.id}`, {
         "Content-Type": "application/json",
         withCredentials: true,
@@ -26,34 +30,38 @@ function App() {
         setVideoInfo(res.data);
       })
       .catch((err) => alert(err));
-    }
-  };
+  }
 
-  useEffect(() => {
+  const pageRefresh = () => {
     axios
       .get("http://localhost:4000/", { withCredentials: true })
       .then((res) => {
+        console.log(res.data);
         setImgs(res.data);
       })
       .catch((err) => alert(err));
-  }, [videoInfo]);
+  }
 
+  useEffect(() => {
+    pageRefresh();
+  }, [videoInfo]);
 
 
   return (
     <BrowserRouter>
+      <Header pageRefresh={pageRefresh} />
       <Switch>
         <Route exact path="/">
           <PlayList imgs={imgs} handleClick={handleClick} />
         </Route>
-        <Route path="/play">
-          <Main videoInfo={videoInfo} imgs={imgs} handleClick={handleClick} />
+        <Route path="/main">
+          <Main videoInfo={videoInfo} imgs={imgs_} handleClick={handleClick} />
         </Route>
-        <Route path="/subscription">
-          <Subscription />
+        <Route path="/subscriptions">
+          <Subscriptions imgs={imgs} handleClick={handleClick} />
         </Route>
         <Route path="/upload">
-          <Upload />
+          <Upload pageRefresh={pageRefresh} />
         </Route>
       </Switch>
     </BrowserRouter>

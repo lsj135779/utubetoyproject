@@ -35,6 +35,7 @@ const ContentInfo = styled.div`
 `;
 
 export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
+  console.log(thumbnail);
   return (
     <ThumbnailBox
       className={videoInfo ? "main" : null}
@@ -43,7 +44,7 @@ export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
       }}
     >
       <img
-        src={thumbnail.image}
+        src={`http://localhost:4000/${thumbnail.image}`}
         alt={thumbnail.title}
         className={videoInfo ? "main" : null}
       />

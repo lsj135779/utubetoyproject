@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import ContentInfo from "./Thumbnail";
+import axios from "axios";
 
 const Description = styled.div`
   width: 70vw;
@@ -8,7 +8,7 @@ const Description = styled.div`
 `;
 
 const Like = styled.button`
-  width: fit-content;
+  width: max-content;
   cursor: pointer;
   height: 50px;
   margin: 10px;
@@ -49,11 +49,27 @@ const Subscribe = styled(Like)`
 `;
 
 function VideoInfo({ videoInfo }) {
+  console.log(videoInfo);
+  const handleSubscription = () => {
+    axios
+      .post(
+        "http://localhost:4000/subscriptions",
+        { username: videoInfo.userId },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => alert(err));
+  };
+
   return (
     <div>
       <ContentInfo>
         {/* 프로필마크 twittler 스프린트에서 따오기 */}
-        {/* ContentInfo 컴포넌트 최대한 재활용 */}
         <div>프로필마크</div>
         <div className="info">
           <div className="info_name">{videoInfo.title}</div>
@@ -68,9 +84,11 @@ function VideoInfo({ videoInfo }) {
         <DisLike>
           <i className="fas fa-thumbs-down">1,00</i>
         </DisLike>
-        <Subscribe subscribe>구독</Subscribe>
+        <Subscribe subscribe onClick={handleSubscription}>
+          구독
+        </Subscribe>
       </ContentInfo>
-      <Description>어쩌구저쩌구 쌸라쌸랴 영상 설명</Description>
+      <Description>{videoInfo.description}</Description>
     </div>
   );
 }
