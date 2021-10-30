@@ -128,7 +128,7 @@ function VideoInfo({ videoInfo }) {
         </Subscribe> */}
         {/* 나중에 주석풀기 */}
       </ContentInfo>
-      <Description>어쩌구저쩌구 쌸라쌸랴 영상 설명</Description>
+      <Description>{videoInfo.description}</Description>
     </div>
   );
 }

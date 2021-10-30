@@ -3,4 +3,5 @@ module.exports = {
   showVideo: require("./showVideo"),
   upload: require("./upload"),
   subscriptions: require("./subscriptions"),
+  thumbnail: require("./thumbnail"),
 };

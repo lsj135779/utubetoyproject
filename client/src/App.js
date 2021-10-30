@@ -16,8 +16,18 @@ function App() {
   const [imgs, setImgs] = useState([]);
 
   const handleClick = (ThumbnailInfo) => {
-    if (ThumbnailInfo.id !== videoInfo.id) {
       axios
+<<<<<<< HEAD
+      .get(`http://localhost:4000/play/${ThumbnailInfo.id}`, {
+        "Content-Type": "application/json",
+        withCredentials: true,
+      })
+      .then((res) => {
+        localStorage.setItem("clickedVideo", JSON.stringify(res.data));
+        setVideoInfo(res.data);
+      })
+      .catch((err) => alert(err));
+=======
         .get(`http://localhost:4000/play/${ThumbnailInfo.id}`, {
           "Content-Type": "application/json",
           withCredentials: true,
@@ -28,13 +38,18 @@ function App() {
         })
         .catch((err) => alert(err));
     }
+>>>>>>> ca4fb27e3d1206fc5e7927c002f4b5467b7376a8
   };
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/", { withCredentials: true })
       .then((res) => {
+<<<<<<< HEAD
+        console.log(res.data)
+=======
         console.log(res.data);
+>>>>>>> ca4fb27e3d1206fc5e7927c002f4b5467b7376a8
         setImgs(res.data);
       })
       .catch((err) => alert(err));
