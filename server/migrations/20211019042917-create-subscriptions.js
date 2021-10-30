@@ -4,8 +4,18 @@ module.exports = {
     await queryInterface.createTable("subscriptions", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
+      },
+      userId: {
+        // primaryKey: true,
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      subscriberId: {
+        // primaryKey: true,
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {

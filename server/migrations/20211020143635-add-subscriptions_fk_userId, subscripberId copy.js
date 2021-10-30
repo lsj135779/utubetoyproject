@@ -2,9 +2,9 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("subscriptions", "userId", {
-      type: Sequelize.INTEGER,
-    });
+    // await queryInterface.addColumn("subscriptions", "userId", {
+    //   type: Sequelize.INTEGER,
+    // });
     await queryInterface.addConstraint("subscriptions", {
       fields: ["userId"],
       type: "foreign Key",
@@ -13,13 +13,13 @@ module.exports = {
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    await queryInterface.addColumn("subscriptions", "subscriptionId", {
-      type: Sequelize.INTEGER,
-    });
+    // await queryInterface.addColumn("subscriptions", "subscriberId", {
+    //   type: Sequelize.INTEGER,
+    // });
     await queryInterface.addConstraint("subscriptions", {
-      fields: ["subscriptionId"],
+      fields: ["subscriberId"],
       type: "foreign Key",
-      name: "subscriptionId",
+      name: "subscriptions_subscriberId",
       references: { table: "users", field: "id" },
       onDelete: "cascade",
       onUpdate: "cascade",
@@ -33,13 +33,16 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn("subscriptions", "userId");
+    // await queryInterface.removeColumn("subscriptions", "userId");
     await queryInterface.removeConstraint(
       "subscriptions",
       "subscriptions_userId"
     );
-    await queryInterface.removeColumn("subscriptions", "subscriptionId");
-    await queryInterface.removeConstraint("subscriptions", "subscriptionId");
+    //await queryInterface.removeColumn("subscriptions", "subscriberId");
+    await queryInterface.removeConstraint(
+      "subscriptions",
+      "subscriptions_userId"
+    );
     /**
      * Add reverting commands here.
      *
