@@ -4,9 +4,9 @@ import styled from "styled-components";
 const FooterBox = styled.footer`
   height: 100px;
   width: 100%;
-  background-color: #dde0ea;
-  bottom: 0px;
-  position: relative;
+  background: #dde0ea;
+	bottom: 0px;
+	position: absolute;
   div {
     text-align: center;
     padding-top: 40px;
