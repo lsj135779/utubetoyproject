@@ -1,5 +1,6 @@
-const { response } = require("express");
+const { Sequelize } = require("sequelize");
 const { posts, users } = require("../models");
+const Op = Sequelize.Op;
 
 module.exports = {
   get: async (req, res) => {
@@ -17,12 +18,9 @@ module.exports = {
     const result = await posts.findAll({
       include: [{ model: users, attributes: ["username"] }],
     });
+    console.log("----------", result);
     res.status(200).json(result);
   },
-
-  //     const result = await posts.findAll()
-  //     console.log('~~~~~~~',result)
-  //     });
 
   //     //res.status(200).json(result);
 

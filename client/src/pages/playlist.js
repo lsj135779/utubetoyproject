@@ -25,7 +25,8 @@ const Playlist = styled.div`
 `;
 
 export default function PlayList({ handleClick, videoInfo, imgs }) {
-  console.log(imgs);
+
+
   return (
     <Body>
       <br />

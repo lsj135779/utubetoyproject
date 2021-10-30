@@ -24,6 +24,7 @@ module.exports = {
   uploads: (req, res) => {
     //비디오를 서버에 저장한다.
     upload(req, res, (err) => {
+      console.log(req.file)
       if (err) {
         res.status(400).json({ success: false, err });
       } else {
@@ -33,6 +34,7 @@ module.exports = {
           url: req.file.path,
           fileName: req.file.filename,
         });
+
       }
     });
   },
@@ -44,7 +46,7 @@ module.exports = {
       video: req.body.filePath,
       description: req.body.description
     })
-    
-    res.status(200).json({success:true});
-  } 
+
+    res.status(200).json({ success: true });
+  }
 };

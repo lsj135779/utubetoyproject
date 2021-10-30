@@ -1,12 +1,16 @@
 const ffmpeg = require("fluent-ffmpeg");
+//썸네일 사용시 ffmpeg를 다운받아야한다.
+// 우분투 - 터미널에서 sudo apt update -> sudo apt install ffmpeg  // 다운로드 확인 ffmpeg -version
+// Mac - vs code 커맨드라인에서 깃으로 brew install ffmpeg 명령어로 다운
 
 module.exports = {
 	post: (req, res) => {
 		let filePath = "";
 		//비디오 정보 가져오기
+		console.log(`!!!!!!!`, req.body)
 		ffmpeg.ffprobe(req.body.url, function (err, metadata) {
 			//url을 받으면 해당 비디오에대한 정보가 metadata에담김
-			console.log(metadata); //metadata안에담기는 모든정보들 체킹
+			console.log(`#####`, metadata); //metadata안에담기는 모든정보들 체킹
 		});
 		//썸네일 생성
 		ffmpeg(req.body.url) //클라이언트에서보낸 비디오저장경로

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -48,22 +48,52 @@ const Subscribe = styled(Like)`
   color: white;
 `;
 
+const unSubscribe = styled(Like)`
+  background: gray;
+  color: white;
+`;
+
 function VideoInfo({ videoInfo }) {
-  console.log(videoInfo);
+  const [subscribed, setSubscribed] = useState(false);
+
+  // console.log(videoInfo.userId);
   const handleSubscription = () => {
-    axios
-      .post(
-        "http://localhost:4000/subscriptions",
-        { username: videoInfo.userId },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => alert(err));
+    if (subscribed) {
+      //구독 취소
+      axios
+        .post(
+          "http://localhost:4000/subscriptions/delete",
+          { username: 1, subscribername: videoInfo.userId },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          alert(res.data.message);
+          console.log(res.data);
+          setSubscribed(!subscribed);
+        })
+        .catch((err) => alert(err));
+    } else {
+      //구독
+      axios
+        .post(
+          "http://localhost:4000/subscriptions/add",
+          { username: 1, subscribername: videoInfo.userId },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          // console.log("-----", res.data);
+          alert(res.data.message);
+          console.log(res.data);
+          setSubscribed(!subscribed);
+        })
+        .catch((err) => alert(err));
+    }
   };
 
   return (
@@ -84,9 +114,19 @@ function VideoInfo({ videoInfo }) {
         <DisLike>
           <i className="fas fa-thumbs-down">1,00</i>
         </DisLike>
-        <Subscribe subscribe onClick={handleSubscription}>
-          구독
-        </Subscribe>
+
+        {/* 실험용 버튼 */}
+        <button
+          style={{ backgroundColor: `${subscribed ? "#808080" : "#ff0000"}` }}
+          onClick={handleSubscription}
+        >
+          {subscribed ? "구독중" : "구독"}
+        </button>
+        {/* 나중에 주석풀기 */}
+        {/* <Subscribe subscribe onClick={handleSubscription}>
+          {subscribed ? "구독중" : "구독"}
+        </Subscribe> */}
+        {/* 나중에 주석풀기 */}
       </ContentInfo>
       <Description>{videoInfo.description}</Description>
     </div>

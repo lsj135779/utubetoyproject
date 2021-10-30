@@ -4,7 +4,7 @@ import axios from "axios";
 import Thumbnail from "../components/Thumbnail";
 import styled from "styled-components";
 
-function Subscriptions({ imgs, handleClick }) {
+function Subscriptions({ imgs, handleClick, videoInfo }) {
   const [thumbnails, setThumbnails] = useState([]);
 
 
@@ -30,9 +30,14 @@ function Subscriptions({ imgs, handleClick }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/subscriptions", { withCredentials: true })
+      .get(`http://localhost:4000/subscriptions/1`, {
+        withCredentials: true,
+      })
       .then((res) => {
-        setThumbnails(res.data);
+        // setThumbnails(res.data);
+        console.log(res.data);
+
+        //구독자 아이디들만 받아서
       })
       .catch((err) => alert(err));
   }, []);
@@ -53,5 +58,4 @@ function Subscriptions({ imgs, handleClick }) {
     </Body>
   );
 }
-
 export default Subscriptions;

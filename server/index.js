@@ -25,15 +25,7 @@ app.use(
 // app.get(cookieParser());
 
 app.use("/", linksRouter);
-//app.use("/play", linksRouter);
 
-// app.get("/", (req, res) => {
-//   res.status(200).send("Server Response Success");
-// });
-
-// app.get("/login", (res, result) => {
-//   res.status(200);
-// });
 
 module.exports = app.listen(PORT, () => {
   console.log(`Server On: http//localhost:${PORT}/`);

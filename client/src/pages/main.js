@@ -39,6 +39,7 @@ const StyledPlaylist = styled.div`
 `;
 
 export default function Main({ videoInfo, handleClick, imgs }) {
+
   return (
     <>
       <Container>

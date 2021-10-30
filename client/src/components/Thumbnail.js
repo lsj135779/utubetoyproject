@@ -35,6 +35,7 @@ const ContentInfo = styled.div`
 `;
 
 export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
+  console.log(thumbnail);
   return (
     <ThumbnailBox
       className={videoInfo ? "main" : null}
