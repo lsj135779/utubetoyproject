@@ -1,15 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Header from "../components/Header";
 import Thumbnail from "../components/Thumbnail";
-import Footer from "../components/Footer";
 
-const Wrap = styled.div`
-  min-height: 100vh;
-  position: relative;
-  width: 100%;
-`;
 
 const Body = styled.div`
   padding-bottom: 100px;
@@ -35,24 +28,21 @@ export default function PlayList({ handleClick, videoInfo, imgs }) {
 
 
   return (
-    <Wrap>
-      <Body>
-        <br />
-        <h1>Recommended</h1>
-        <Playlist>
-          {imgs.map((thumbnail) => (
-            <Link to="/main" className="link">
-              <Thumbnail
-                key={thumbnail.id}
-                videoInfo={videoInfo}
-                thumbnail={thumbnail}
-                handleClick={handleClick}
-              />
-            </Link>
-          ))}
-        </Playlist>
-      </Body>
-      <Footer />
-    </Wrap>
+    <Body>
+      <br />
+      <h1>Recommended</h1>
+      <Playlist>
+        {imgs.map((thumbnail) => (
+          <Link to="/main" className="link">
+            <Thumbnail
+              videoInfo={videoInfo}
+              key={thumbnail.id}
+              thumbnail={thumbnail}
+              handleClick={handleClick}
+            />
+          </Link>
+        ))}
+      </Playlist>
+    </Body>
   );
 }

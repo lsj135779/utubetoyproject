@@ -3,16 +3,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Thumbnail from "../components/Thumbnail";
 import styled from "styled-components";
-import Footer from "../components/Footer";
 
 function Subscriptions({ imgs, handleClick, videoInfo }) {
   const [thumbnails, setThumbnails] = useState([]);
 
-  const Wrap = styled.div`
-    min-height: 100vh;
-    position: relative;
-    width: 100%;
-  `;
 
   const Body = styled.div`
     padding-bottom: 100px;
@@ -49,22 +43,19 @@ function Subscriptions({ imgs, handleClick, videoInfo }) {
   }, []);
 
   return (
-    <Wrap>
-      <Body>
-        <StyledPlaylist>
-          {thumbnails.map((thumbnail) => (
-            <Link to="/main" className="link">
-              <Thumbnail
-                key={thumbnail.id}
-                thumbnail={thumbnail}
-                handleClick={handleClick}
-              />
-            </Link>
-          ))}
-        </StyledPlaylist>
-        <Footer />
-      </Body>
-    </Wrap>
+    <Body>
+      <StyledPlaylist>
+        {thumbnails.map((thumbnail) => (
+          <Link to="/main" className="link">
+            <Thumbnail
+              key={thumbnail.id}
+              thumbnail={thumbnail}
+              handleClick={handleClick}
+            />
+          </Link>
+        ))}
+      </StyledPlaylist>
+    </Body>
   );
 }
 export default Subscriptions;
