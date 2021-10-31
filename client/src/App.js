@@ -52,6 +52,9 @@ function App() {
 
       })
       .catch((err) => alert(err));
+  }
+
+  const subscriptionRefresh = () => {
     axios
       .get(`http://localhost:4000/subscriptions/1`)
       .then(res => {
@@ -63,26 +66,31 @@ function App() {
 
   useEffect(() => {
     pageRefresh();
+    subscriptionRefresh();
+
   }, [videoInfo]);
 
 
   return (
     <BrowserRouter>
-      <Header pageRefresh={pageRefresh} />
-      <Switch>
-        <Route exact path="/">
-          <PlayList imgs={imgs} handleClick={handleClick} videoInfo={videoInfo} />
-        </Route>
-        <Route path="/main">
-          <Main videoInfo={videoInfo} pageRefresh={pageRefresh} imgs={imgs_} handleClick={handleClick} setSubscription={setSubscription} subscription={subscription} />
-        </Route>
-        <Route path="/subscriptions">
-          <Subscriptions imgs={imgs} handleClick={handleClick} />
-        </Route>
-        <Route path="/upload">
-          <Upload pageRefresh={pageRefresh} />
-        </Route>
-      </Switch>
+      <Wrap>
+        <Header pageRefresh={pageRefresh} />
+        <Switch>
+          <Route exact path="/">
+            <PlayList imgs={imgs} handleClick={handleClick} videoInfo={videoInfo} />
+          </Route>
+          <Route path="/main">
+            <Main videoInfo={videoInfo} subscriptionRefresh={subscriptionRefresh} imgs={imgs_} handleClick={handleClick} setSubscription={setSubscription} subscription={subscription} />
+          </Route>
+          <Route path="/subscriptions">
+            <Subscriptions imgs={imgs} handleClick={handleClick} />
+          </Route>
+          <Route path="/upload">
+            <Upload pageRefresh={pageRefresh} />
+          </Route>
+        </Switch>
+        <Footer />
+      </Wrap>
     </BrowserRouter>
   );
 }

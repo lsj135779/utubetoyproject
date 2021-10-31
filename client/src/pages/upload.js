@@ -5,12 +5,6 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import Footer from "../components/Footer";
 
-const Wrap = styled.div`
-  min-height: 100vh;
-  position: relative;
-  width: 100%;
-`;
-
 const Body = styled.div`
   margin: 10px 50px 0px 50px;
   padding-bottom: 150px;
@@ -147,37 +141,34 @@ export default function Upload({ pageRefresh }) {
   };
 
   return (
-    <Wrap>
-      <Body>
-        <div>
-          <h1>Upload Video</h1>
-        </div>
-        <div className="drop">
-          <Dropbox {...getRootProps()}>
-            <input {...getInputProps()} />
-            <i className="fas fa-plus"></i>
-            {isDragActive ? (
-              <p>Drop the files here ...</p>
-            ) : (
-              <p>Drag 'n' drop a file here, or click</p>
-            )}
-          </Dropbox>
-          {thumbnail ? <img src={`http://localhost:4000/${thumbnail}`} alt="썸네일"></img> : null}
-        </div>
-        <br />
-        <br />
-        <label>Title</label>
-        <input value={title} type="text" placeholder="제목을 입력하세요" onChange={setTitle}></input>
-        <br />
-        <br />
-        <label>Description</label>
-        <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
-        <br />
-        <br />
-        <button onClick={postUpload} >Submit</button>
+    <Body>
+      <div>
+        <h1>Upload Video</h1>
+      </div>
+      <div className="drop">
+        <Dropbox {...getRootProps()}>
+          <input {...getInputProps()} />
+          <i className="fas fa-plus"></i>
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag 'n' drop a file here, or click</p>
+          )}
+        </Dropbox>
+        {thumbnail ? <img src={`http://localhost:4000/${thumbnail}`} alt="썸네일"></img> : null}
+      </div>
+      <br />
+      <br />
+      <label>Title</label>
+      <input value={title} type="text" placeholder="제목을 입력하세요" onChange={setTitle}></input>
+      <br />
+      <br />
+      <label>Description</label>
+      <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
+      <br />
+      <br />
+      <button onClick={postUpload} >Submit</button>
 
-      </Body>
-      <Footer />
-    </Wrap>
+    </Body>
   );
 }
