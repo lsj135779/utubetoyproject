@@ -22,19 +22,20 @@ function App() {
   );
   const [imgs, setImgs] = useState([]);
   const [imgs_, setImgs_] = useState([]);
-  const [style, setStyle] = useState(false);
-  
+  const [subscription, setSubscription] = useState(JSON.parse(localStorage.getItem("subscription")));
+
+
   const handleClick = (ThumbnailInfo) => {
     // const imgs_one = imgs.filter(img => img.id !== ThumbnailInfo.id)
     // setImgs_(imgs_one);
-    setStyle(true);
     axios
       .get(`http://localhost:4000/play/${ThumbnailInfo.id}`, {
         "Content-Type": "application/json",
         withCredentials: true,
       })
       .then((res) => {
-        localStorage.setItem("clickedVideo", JSON.stringify(res.data)); 
+        localStorage.setItem("clickedVideo", JSON.stringify(res.data));
+        //console.log(res.data.user.picture)
         setVideoInfo(res.data);
       })
       .catch((err) => alert(err));
@@ -50,6 +51,13 @@ function App() {
         setImgs_(imgs_one);
       })
       .catch((err) => alert(err));
+    axios
+      .get(`http://localhost:4000/subscriptions/1`)
+      .then(res => {
+        console.log(res.data);
+        setSubscription(res.data);
+        localStorage.setItem("subscription", JSON.stringify(res.data));
+      })
   }
 
   useEffect(() => {
@@ -60,13 +68,13 @@ function App() {
   return (
     <BrowserRouter>
       <Wrap>
-        <Header pageRefresh={pageRefresh} setStyle={setStyle}/>
+        <Header pageRefresh={pageRefresh} />
         <Switch>
           <Route exact path="/">
-            <PlayList imgs={imgs} handleClick={handleClick} style={style}/>
+            <PlayList imgs={imgs} handleClick={handleClick} videoInfo={videoInfo} />
           </Route>
           <Route path="/main">
-            <Main videoInfo={videoInfo} imgs={imgs_} handleClick={handleClick} style={style}/>
+            <Main videoInfo={videoInfo} pageRefresh={pageRefresh} imgs={imgs_} handleClick={handleClick} setSubscription={setSubscription} subscription={subscription} />
           </Route>
           <Route path="/subscriptions">
             <Subscriptions imgs={imgs} handleClick={handleClick} />
@@ -75,7 +83,7 @@ function App() {
             <Upload pageRefresh={pageRefresh} />
           </Route>
         </Switch>
-        <Footer/>
+        <Footer />
       </Wrap>
     </BrowserRouter>
   );

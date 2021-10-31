@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 
-
 const Body = styled.div`
   margin: 10px 50px 0px 50px;
   padding-bottom: 150px;
@@ -66,9 +65,8 @@ export default function Upload({ pageRefresh }) {
       let file = acceptedFiles[0];
       if (!file.type.includes('video')) alert("비디오 파일만 업로드하세요.")
       else {
-        if (window.confirm('업로드할 영상이 맞습니까?')) {
+        if (window.confirm("업로드할 영상이 맞나요?")) {
           isTitle(acceptedFiles[0].name);
-  
           // 서버에 동영상 저장요청
           const formData = new FormData();
           formData.append('upload', file);
@@ -123,17 +121,15 @@ export default function Upload({ pageRefresh }) {
       image: thumbnail,
       filePath: filePath,
       description: description,
+
     };
     if (thumbnail) {
       axios.post(`http://localhost:4000/upload/file`, payload)
         .then((response) => {
           if (response.data.success) {
-            // console.log(response.data);
+            console.log(response.data);
             pageRefresh();
-            alert('업로드가 완료되었습니다.')
-            setTimeout(() => {
-              history.push('/');
-            }, 1000)
+            history.push('/');
           }
           else {
             console.log('업로드 실패')
