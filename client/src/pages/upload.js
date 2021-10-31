@@ -3,6 +3,10 @@ import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+<<<<<<< HEAD
+=======
+import Footer from "../components/Footer";
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
 
 const Body = styled.div`
   margin: 10px 50px 0px 50px;
@@ -148,17 +152,26 @@ export default function Upload({ pageRefresh }) {
           <input {...getInputProps()} />
           <i className="fas fa-plus"></i>
           {isDragActive ? (
+<<<<<<< HEAD
             <p className="on">Drop the files here ...</p>
+=======
+            <p>Drop the files here ...</p>
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
           ) : (
             <p>Drag 'n' drop a file here, or click</p>
           )}
         </Dropbox>
         {thumbnail ? <img src={`http://localhost:4000/${thumbnail}`} alt="썸네일"></img> : null}
+<<<<<<< HEAD
       </div>      
+=======
+      </div>
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
       <br />
       <br />
       <label>Title</label>
       <input value={title} type="text" placeholder="제목을 입력하세요" onChange={setTitle}></input>
+<<<<<<< HEAD
       <br/>
       <br/>
       <label>Description</label> 
@@ -166,6 +179,16 @@ export default function Upload({ pageRefresh }) {
       <br/>
       <br />
       <button onClick={postUpload} >Submit</button>
+=======
+      <br />
+      <br />
+      <label>Description</label>
+      <textarea value={description} type="text" placeholder="설명을 입력하세요" onChange={setDescription}></textarea>
+      <br />
+      <br />
+      <button onClick={postUpload} >Submit</button>
+
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
     </Body>
   );
 }

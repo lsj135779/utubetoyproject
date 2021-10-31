@@ -55,15 +55,14 @@ const Subscribe = styled(Like)`
 `;
 
 const unSubscribe = styled(Like)`
-  background: gray;
-  color: white;
+background: gray;
+color: white;
 `;
 
-function VideoInfo({ videoInfo, subscription, pageRefresh, setSubscription }) {
-  const [subscriptionIds, setSubscriptionIds] = useState(subscription.map(x => x.subscriberId));
+function VideoInfo({ videoInfo, subscription, subscriptionRefresh, setSubscription }) {
 
   const handleSubscription = () => {
-    if (subscriptionIds.includes(videoInfo.userId)) {
+    if (subscription.map(x => x.subscriberId).includes(videoInfo.userId)) {
       //구독 취소
 
       axios
@@ -77,9 +76,7 @@ function VideoInfo({ videoInfo, subscription, pageRefresh, setSubscription }) {
         )
         .then((res) => {
           alert(res.data.message);
-          console.log(res.data);
-          const rest = subscriptionIds.filter(id => id !== res.data.data);
-          setSubscriptionIds(rest)
+          subscriptionRefresh();
         })
         .catch((err) => alert(err));
     } else {
@@ -95,12 +92,10 @@ function VideoInfo({ videoInfo, subscription, pageRefresh, setSubscription }) {
         )
         .then((res) => {
           alert(res.data.message);
-          console.log(res.data);
-          setSubscriptionIds([...subscriptionIds, res.data.data]);
+          subscriptionRefresh();
         })
         .catch((err) => alert(err));
     }
-    pageRefresh();
   };
 
   return (
@@ -124,9 +119,9 @@ function VideoInfo({ videoInfo, subscription, pageRefresh, setSubscription }) {
         {/* 실험용 버튼 */}
         <button
           onClick={handleSubscription}
-          style={{ backgroundColor: `${subscriptionIds.includes(videoInfo.userId) ? "#808080" : "#ff0000"}` }}
+          style={{ backgroundColor: `${subscription.map(x => x.subscriberId).includes(videoInfo.userId) ? "#808080" : "#ff0000"}` }}
         >
-          {subscriptionIds.includes(videoInfo.userId) ? "구독중" : "구독"}
+          {subscription.map(x => x.subscriberId).includes(videoInfo.userId) ? "구독중" : "구독"}
         </button>
         {/* 나중에 주석풀기 */}
         {/* <Subscribe subscribe onClick={handleSubscription}>

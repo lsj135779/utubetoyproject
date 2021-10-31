@@ -51,6 +51,9 @@ function App() {
         setImgs_(imgs_one);
       })
       .catch((err) => alert(err));
+  }
+
+  const subscriptionRefresh = () => {
     axios
       .get(`http://localhost:4000/subscriptions/1`)
       .then(res => {
@@ -62,6 +65,8 @@ function App() {
 
   useEffect(() => {
     pageRefresh();
+    subscriptionRefresh();
+
   }, [videoInfo]);
 
 
@@ -74,7 +79,11 @@ function App() {
             <PlayList imgs={imgs} handleClick={handleClick} videoInfo={videoInfo} />
           </Route>
           <Route path="/main">
+<<<<<<< HEAD
             <Main videoInfo={videoInfo} pageRefresh={pageRefresh} imgs={imgs_} handleClick={handleClick} setSubscription={setSubscription} subscription={subscription} />
+=======
+            <Main videoInfo={videoInfo} subscriptionRefresh={subscriptionRefresh} imgs={imgs_} handleClick={handleClick} setSubscription={setSubscription} subscription={subscription} />
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
           </Route>
           <Route path="/subscriptions">
             <Subscriptions imgs={imgs} handleClick={handleClick} />

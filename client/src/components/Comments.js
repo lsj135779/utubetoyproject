@@ -29,10 +29,10 @@ const Commentlist = styled.div`
  
 `;
 
-export default function Comments() {
+export default function Comments({ videoInfo }) {
   const [comment, setComment] = useState()
   const dummyCommit = dummyData.comment;
-  console.log(dummyCommit);
+  console.log(videoInfo);
 
   const inputComment = (e) => {
     // console.log(e.target.value)

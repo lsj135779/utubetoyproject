@@ -7,10 +7,16 @@ import VideoInfo from "../components/VideoInfo";
 import Comments from "../components/Comments";
 
 const Body = styled.div`
+<<<<<<< HEAD
   padding-bottom: 150px;
 `;
 
 
+=======
+  padding-bottom: 150px;;
+`;
+
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
@@ -44,7 +50,7 @@ const StyledPlaylist = styled.div`
   }
 `;
 
-export default function Main({ videoInfo, handleClick, imgs, subscription, pageRefresh, setSubscription }) {
+export default function Main({ videoInfo, handleClick, imgs, subscription, subscriptionRefresh, setSubscription }) {
 
   return (
     <Body>
@@ -61,9 +67,9 @@ export default function Main({ videoInfo, handleClick, imgs, subscription, pageR
                 playing={true}
               />
             </PlayerWrapper>
-            <VideoInfo videoInfo={videoInfo} setSubscription={setSubscription} subscription={subscription} pageRefresh={pageRefresh} />
+            <VideoInfo videoInfo={videoInfo} setSubscription={setSubscription} subscription={subscription} subscriptionRefresh={subscriptionRefresh} />
           </StyledMain>
-          <Comments />
+          <Comments videoInfo={videoInfo} />
         </div>
         <StyledPlaylist>
           {imgs.map((thumbnail) => (
@@ -78,7 +84,10 @@ export default function Main({ videoInfo, handleClick, imgs, subscription, pageR
           ))}
         </StyledPlaylist>
       </Container>
+<<<<<<< HEAD
       <Comments />
+=======
+>>>>>>> 3c80c6f8753800836e46b6f5077fde182c7bf217
     </Body>
   );
 }

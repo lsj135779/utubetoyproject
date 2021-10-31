@@ -9,7 +9,7 @@ function Subscriptions({ imgs, handleClick, videoInfo }) {
 
 
   const Body = styled.div`
-    padding-bottom: 100px;
+    padding-bottom: 150px;
     h1 {
       margin: 10px 50px 0 50px;
     }
