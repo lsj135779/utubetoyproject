@@ -5,7 +5,7 @@ import Thumbnail from "../components/Thumbnail";
 
 
 const Body = styled.div`
-  padding-bottom: 100px;
+  padding-bottom: 150px;
   h1 {
     margin: 10px 50px 0 50px;
   }
@@ -24,7 +24,7 @@ const Playlist = styled.div`
   }
 `;
 
-export default function PlayList({ handleClick, videoInfo, imgs }) {
+export default function PlayList({ handleClick, videoInfo, imgs, style }) {
 
 
   return (
@@ -35,6 +35,7 @@ export default function PlayList({ handleClick, videoInfo, imgs }) {
         {imgs.map((thumbnail) => (
           <Link to="/main" className="link">
             <Thumbnail
+              style={style}
               videoInfo={videoInfo}
               key={thumbnail.id}
               thumbnail={thumbnail}

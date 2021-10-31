@@ -34,11 +34,10 @@ const ContentInfo = styled.div`
   }
 `;
 
-export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
-  console.log(thumbnail);
+export default function Thumbnail({ thumbnail, handleClick, videoInfo, style }) {
   return (
     <ThumbnailBox
-      className={videoInfo ? "main" : null}
+      className={style ? "main" : null}
       onClick={() => {
         handleClick(thumbnail);
       }}
@@ -46,7 +45,7 @@ export default function Thumbnail({ thumbnail, handleClick, videoInfo }) {
       <img
         src={`http://localhost:4000/${thumbnail.image}`}
         alt={thumbnail.title}
-        className={videoInfo ? "main" : null}
+        className={style ? "main" : null}
       />
       <ContentInfo>
         <div>프로필마크</div>

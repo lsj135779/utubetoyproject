@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 import VideoInfo from "../components/VideoInfo";
 import Comments from "../components/Comments";
 
+const Body = styled.div`
+  padding-bottom: 150px;
+`;
+
+
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
@@ -38,10 +43,10 @@ const StyledPlaylist = styled.div`
   }
 `;
 
-export default function Main({ videoInfo, handleClick, imgs }) {
+export default function Main({ videoInfo, handleClick, imgs, style }) {
 
   return (
-    <>
+    <Body>
       <Container>
         <StyledMain>
           <PlayerWrapper>
@@ -60,6 +65,7 @@ export default function Main({ videoInfo, handleClick, imgs }) {
           {imgs.map((thumbnail) => (
             <Link to="/main" key={thumbnail.id} className="link">
               <Thumbnail
+                style={style}
                 key={thumbnail.id}
                 videoInfo={videoInfo}
                 thumbnail={thumbnail}
@@ -70,6 +76,6 @@ export default function Main({ videoInfo, handleClick, imgs }) {
         </StyledPlaylist>
       </Container>
       <Comments />
-    </>
+    </Body>
   );
 }

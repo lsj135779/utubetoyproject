@@ -54,6 +54,7 @@ const unSubscribe = styled(Like)`
 `;
 
 function VideoInfo({ videoInfo }) {
+  console.log(videoInfo)
   const [subscribed, setSubscribed] = useState(false);
 
   // console.log(videoInfo.userId);
@@ -87,7 +88,6 @@ function VideoInfo({ videoInfo }) {
           }
         )
         .then((res) => {
-          // console.log("-----", res.data);
           alert(res.data.message);
           console.log(res.data);
           setSubscribed(!subscribed);

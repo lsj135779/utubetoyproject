@@ -31,11 +31,15 @@ const Img = styled.img`
   width: ${(props) => props.width || "100px"};
 `;
 
-export default function Header({ pageRefresh }) {
+export default function Header({ pageRefresh, setStyle }) {
+  const styleChange = () => {
+    setStyle(false);
+  }
+
   return (
     <HeadBox>
       <Link to="/" className="head left" onClick={pageRefresh}>
-        <Img src="youtube.png" alt="Logo" />
+        <Img src="youtube.png" alt="Logo" onClick={styleChange}/>
       </Link>
       {/* <Link to="/subscription" className="head left link">
         Subscription
